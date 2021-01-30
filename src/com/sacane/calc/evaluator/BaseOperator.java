@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 /**
  * TODO : Continue to inserts/correct comments
  */
-enum BaseOperator {
+public enum BaseOperator {
     SUB("-", 2, true, (a, b) -> a - b),
     ADD("+", 2, true, Double::sum),
     DIV("/", 3, true, (a, b) -> a / b),
@@ -35,11 +35,15 @@ enum BaseOperator {
      * @param symbol of the BaseOperator to get.
      * @return the BaseOperator of the symbol taken as parameter.
      */
-    static BaseOperator get(String symbol) {
+    public static BaseOperator get(String symbol) {
         return Arrays.stream(BaseOperator.values()).filter(it -> it.symbol.equals(symbol)).findFirst().orElse(null);
     }
 
-    static String symbols() {
+    public String getSymbol(){
+        return symbol;
+    }
+
+    public static String symbols() {
         return Arrays.stream(BaseOperator.values()).map(s -> s.symbol).collect(Collectors.joining(""));
     }
 
