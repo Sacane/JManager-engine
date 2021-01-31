@@ -19,10 +19,18 @@ public class WindowManager extends JFrame{
 
     private JPanel contentPanel(){
         var panel = new JPanel();
+        var panel2 = new JPanel();
+
+
+        //panel management
         panel.setLayout(new FlowLayout());
         setBackground(Color.WHITE);
         JLabel label = new JLabel("Let's do maths !");
         panel.add(label);
+
+
+        //panel2 management
+
 
         return panel;
     }
@@ -36,6 +44,6 @@ public class WindowManager extends JFrame{
         setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setContentPane(action.initButton());
+        setContentPane(action.contentPanel());
     }
 }
