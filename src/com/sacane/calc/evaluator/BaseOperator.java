@@ -35,7 +35,7 @@ public enum BaseOperator {
      * @param symbol of the BaseOperator to get.
      * @return the BaseOperator of the symbol taken as parameter.
      */
-    public static BaseOperator get(String symbol) {
+    static BaseOperator get(String symbol) {
         return Arrays.stream(BaseOperator.values()).filter(it -> it.symbol.equals(symbol)).findFirst().orElse(null);
     }
 
@@ -43,7 +43,7 @@ public enum BaseOperator {
         return symbol;
     }
 
-    public static String symbols() {
+    static String symbols() {
         return Arrays.stream(BaseOperator.values()).map(s -> s.symbol).collect(Collectors.joining(""));
     }
 

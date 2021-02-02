@@ -11,4 +11,5 @@ public final class Evaluator {
         var ast = ParseString.convertInfixToAST(input);
         return ast.eval();
     }
+
 }

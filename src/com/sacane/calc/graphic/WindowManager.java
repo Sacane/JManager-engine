@@ -8,7 +8,7 @@ public class WindowManager extends JFrame{
 
 
     public static final int WIDTH = 500;
-    public static final int HEIGHT = 500;
+    public static final int HEIGHT = 350;
 
     public WindowManager(){
         super();
@@ -38,12 +38,15 @@ public class WindowManager extends JFrame{
 
 
     private void build(){
+        var panel = new JPanel();
+
         var action = new ActionManager();
+        panel = action.contentPanel();
         setTitle("Calculator");
         setSize(WIDTH,HEIGHT);
         setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setContentPane(action.contentPanel());
+        setContentPane(panel);
     }
 }
