@@ -1,6 +1,8 @@
 package com.sacane.calc.main;
 
-import com.sacane.calc.graphic.WindowManager;
+
+
+import com.sacane.calc.gui.WindowManager;
 
 import javax.swing.*;
 
