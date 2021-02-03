@@ -16,7 +16,6 @@ public class WindowManager extends JFrame {
 
     private void build(){
         var config = new PanelConfig();
-        var action = new ActionManager();
         var panel = new JPanel();
         setTitle("Calculator");
         panel = config.setContentPanel();
