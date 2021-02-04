@@ -13,7 +13,6 @@ public class Grid {
         management.put(date, leaf);
     }
 
-
     public double incomeSum(){
         return management.values().stream().mapToDouble(Leaf::getAmount).sum();
     }
@@ -23,7 +22,6 @@ public class Grid {
                 leaf.getAmount() > gapDown && leaf.getAmount() < gapUp
         ).collect(Collectors.toSet());
     }
-
 
     public Set<Leaf> borderIncome(double gapDown){
         return management.values().stream().filter(leaf ->
