@@ -69,7 +69,7 @@ public final class ParseString {
      * @return the final Node converted.
      */
     //TODO comment the algorithm
-    static Node convertInfixToAST(String input){
+    static Node convertInfixToAST(String input) throws IllegalStateException{
         var tokens = tokenize(input);
         final Stack<String> operatorStack = new Stack<>();
         final Stack<Node> operandStack = new Stack<>();

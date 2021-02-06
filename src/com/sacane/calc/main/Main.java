@@ -1,9 +1,17 @@
 package com.sacane.calc.main;
 
-import com.sacane.calc.evaluator.Evaluator;
+
+
+import com.sacane.calc.gui.WindowManager;
+
+import javax.swing.*;
+
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println(Evaluator.eval("3+ 5 *(1.2-9)"));
+        SwingUtilities.invokeLater(() -> {
+            var window = new WindowManager();
+            window.setVisible(true);
+        });
     }
 }
