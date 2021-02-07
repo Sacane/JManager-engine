@@ -9,10 +9,11 @@ public enum Month {
     MAY("May", 5),
     JUNE("June", 6),
     JULY("July", 7),
-    SEPTEMBER("September", 8),
-    OCTOBER("October", 9),
-    NOVEMBER("November", 10),
-    DECEMBER("December", 11);
+    AUGUST("August", 8),
+    SEPTEMBER("September", 9),
+    OCTOBER("October", 10),
+    NOVEMBER("November", 11),
+    DECEMBER("December", 12);
 
     private final String typeText;
     private final int representation;
