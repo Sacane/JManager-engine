@@ -1,16 +1,15 @@
 package com.sacane.manager;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.Objects;
 
-public class DataSql {
+public class DataManagement {
+
     private Connection connection;
-    private final String dbPath;
     private Statement statement;
 
-    public DataSql(String dbPath){
-        this.dbPath = dbPath;
+    public DataManagement(){
+
         connection = null;
         statement = null;
     }
@@ -27,7 +26,7 @@ public class DataSql {
             Class.forName("org.sqlite.JDBC");
 
             // create a connection to the database
-            connection = DriverManager.getConnection(dbPath);
+            connection = DriverManager.getConnection(getPathToSql());
             statement = connection.createStatement();
 
             System.out.println("Connection to SQLite has been established.");
@@ -47,18 +46,39 @@ public class DataSql {
         }
     }
 
-    public void addIncome(String request){
+    public void executeRequest(String request){
         try{
             statement.executeUpdate(request);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            System.exit(1);
         }
     }
 
-
-
-
-    String getDbPath(){
-        return dbPath;
+    private ResultSet getElementByRequest(boolean is_income){
+        ResultSet res;
+        try{
+            res = statement.executeQuery("SELECT value_inc FROM income WHERE is_income = " + String.valueOf(is_income));
+        } catch (SQLException se) {
+            return null;
+        }
+        return res;
     }
+
+    public ArrayList<Double> getInOutcome(boolean is_income){
+        var listIncome = new ArrayList<Double>();
+        var incomes = getElementByRequest(true);
+        try {
+            while(Objects.requireNonNull(incomes).next()){
+                listIncome.add(incomes.getDouble("value_inc"));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            System.exit(1);
+        }
+        return listIncome;
+    }
+
+
+
 }

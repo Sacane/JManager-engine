@@ -2,30 +2,34 @@ package com.sacane.manager;
 
 public enum Month {
 
-    JANUARY("January", 1),
-    FEBRUARY("February", 2),
-    MARCH("March", 3),
-    APRIL("April", 4),
-    MAY("May", 5),
-    JUNE("June", 6),
-    JULY("July", 7),
-    AUGUST("August", 8),
-    SEPTEMBER("September", 9),
-    OCTOBER("October", 10),
-    NOVEMBER("November", 11),
-    DECEMBER("December", 12);
+    JANUARY("January", "01"),
+    FEBRUARY("February", "02"),
+    MARCH("March", "03"),
+    APRIL("April", "04"),
+    MAY("May", "05"),
+    JUNE("June", "06"),
+    JULY("July", "07"),
+    AUGUST("August", "08"),
+    SEPTEMBER("September", "09"),
+    OCTOBER("October", "10"),
+    NOVEMBER("November", "11"),
+    DECEMBER("December", "12");
 
     private final String typeText;
-    private final int representation;
-    Month(String typeText, int representation){
+    private final String representation;
+
+
+
+    Month(String typeText, String representation){
         this.typeText = typeText;
         this.representation = representation;
     }
 
-    String getTypeText(){
+    public String getTypeText(){
         return typeText;
     }
-    int getRepresentation(){
+
+    String getRepresentation(){
         return representation;
     }
 }
