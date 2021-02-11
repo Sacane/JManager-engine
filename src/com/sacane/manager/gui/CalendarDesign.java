@@ -1,20 +1,15 @@
 package com.sacane.manager.gui;
-
 import javax.swing.*;
 import java.awt.*;
 
 public class CalendarDesign extends JFrame {
 
     public CalendarDesign(){
-
         super();
         build();
         setTitle("JManager");
     }
 
-    CalendarDesign getFrame(){
-        return this;
-    }
 
     private void build(){
         var calendar = new Calendar();

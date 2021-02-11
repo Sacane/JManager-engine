@@ -30,3 +30,4 @@ CREATE TABLE project(
     value float NOT NULL,
     duration int 
 );
+

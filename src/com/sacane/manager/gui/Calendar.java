@@ -16,19 +16,20 @@ public class Calendar implements ActionListener {
     private final JPanel yearPanel = new JPanel();
     private final JPanel monthPanel = new JPanel();
     private final JButton addYear = new JButton("add");
+    private int current_year;
     private int maxYear;
-
+    private Month current_mont;
 
 
     public Calendar(){
-
         calendar.setLayout(new BorderLayout());
-        yearPanel.setLayout(new GridLayout(7, 2));
+        yearPanel.setLayout(new GridLayout(10, 1));
         monthPanel.setLayout(new GridLayout(3, 4));
         buildPanel();
         maxYear = 2021;
-
+        current_year = maxYear;
     }
+
 
 
     JPanel getCalendarPanel(){
@@ -93,13 +94,19 @@ public class Calendar implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         var o = e.getSource();
+        var button = (JButton)o;
         if(o == addYear){
-            System.out.println("typed");
             maxYear +=1;
             createButton(maxYear);
             updateButton();
             yearPanel.validate();
             yearPanel.repaint();
         }
+
+        if(yearButton.contains(button)){
+            current_year = Integer.parseInt(button.getText());
+            System.out.println(current_year);
+        }
+
     }
 }
