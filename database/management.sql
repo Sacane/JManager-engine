@@ -31,3 +31,9 @@ CREATE TABLE project(
     duration int 
 );
 
+CREATE TABLE self(
+    id_self INTEGER PRIMARY KEY AUTOINCREMENT,
+    name VARCHAR(100) NOT NULL,
+    firstName VARCHAR(100) NOT NULL,
+    amount float NOT NULL
+);

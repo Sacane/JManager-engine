@@ -8,6 +8,7 @@ public class CalendarDesign extends JFrame {
         super();
         build();
         setTitle("JManager");
+        setResizable(false);
     }
 
 
@@ -23,9 +24,6 @@ public class CalendarDesign extends JFrame {
         setJMenuBar(calendar.getMenu());
     }
 
-    public static void main(String[] args) {
-        var calendar = new CalendarDesign();
-        calendar.setVisible(true);
-    }
+
 
 }

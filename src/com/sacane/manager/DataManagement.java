@@ -7,6 +7,7 @@ public class DataManagement {
 
     private Connection connection;
     private Statement statement;
+    private int totalAmount;
 
     public DataManagement(){
 
@@ -55,19 +56,21 @@ public class DataManagement {
         }
     }
 
-    private ResultSet getElementByRequest(boolean is_income){
+    private ResultSet getAmount(boolean is_income){
         ResultSet res;
         try{
-            res = statement.executeQuery("SELECT value_inc FROM income WHERE is_income = " + String.valueOf(is_income));
+            res = statement.executeQuery("SELECT value_inc FROM income WHERE is_income = " + is_income);
         } catch (SQLException se) {
             return null;
         }
         return res;
     }
 
-    public ArrayList<Double> getInOutcome(boolean is_income){
+
+
+    public ArrayList<Double> updateIncome(boolean is_income){
         var listIncome = new ArrayList<Double>();
-        var incomes = getElementByRequest(true);
+        var incomes = getAmount(is_income);
         try {
             while(Objects.requireNonNull(incomes).next()){
                 listIncome.add(incomes.getDouble("value_inc"));
@@ -78,6 +81,7 @@ public class DataManagement {
         }
         return listIncome;
     }
+
 
 
 

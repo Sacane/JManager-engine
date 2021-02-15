@@ -1,8 +1,11 @@
 package com.sacane.manager.gui;
 
+
+import com.sacane.calc.main.Run;
 import com.sacane.manager.Month;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,22 +15,34 @@ public class Calendar implements ActionListener {
 
     private final JMenuBar menu = new JMenuBar();
     private final ArrayList<JButton> yearButton = new ArrayList<>();
+    private final ArrayList<JButton> monthButton = new ArrayList<>();
     private final JPanel calendar = new JPanel();
     private final JPanel yearPanel = new JPanel();
     private final JPanel monthPanel = new JPanel();
     private final JButton addYear = new JButton("add");
-    private int current_year;
+    private int currentYear;
     private int maxYear;
-    private Month current_mont;
-
+    private Month currentMonth;
+    private final JButton calculator = new JButton("Calc");
+    private final JPanel centerPanel = new JPanel();
+    private final JPanel leftPanel = new JPanel();
+    private final JPanel rightPanel = new JPanel();
+    private final JPanel northPanel = new JPanel();
 
     public Calendar(){
+        //Set all the panel in the main panel
+        centerPanel.setLayout(new FlowLayout());
+        leftPanel.setLayout(new FlowLayout());
+        rightPanel.setLayout(new BorderLayout());
+        northPanel.setLayout(new BorderLayout());
+
+
         calendar.setLayout(new BorderLayout());
-        yearPanel.setLayout(new GridLayout(10, 1));
+        yearPanel.setLayout(new GridLayout(15, 3));
         monthPanel.setLayout(new GridLayout(3, 4));
         buildPanel();
         maxYear = 2021;
-        current_year = maxYear;
+        currentYear = maxYear;
     }
 
 
@@ -44,6 +59,7 @@ public class Calendar implements ActionListener {
      * build the mainCalendar panel
      */
     private void buildPanel(){
+
         JMenu file = new JMenu("File");
         JMenu edit = new JMenu("Edit");
         JMenu View = new JMenu("View");
@@ -52,9 +68,14 @@ public class Calendar implements ActionListener {
         menu.add(edit);
         menu.add(View);
         setButton();
+        leftPanel.add(yearPanel, FlowLayout.LEFT);
+        rightPanel.add(calculator, BorderLayout.SOUTH);
+        calendar.add(rightPanel, BorderLayout.EAST);
+        calendar.add(centerPanel, BorderLayout.CENTER);
         calendar.add(menu, BorderLayout.NORTH);
-        calendar.add(yearPanel, BorderLayout.WEST);
-        calendar.add(monthPanel, BorderLayout.CENTER);
+//        calendar.add(yearPanel, BorderLayout.WEST);
+        calendar.add(leftPanel, BorderLayout.WEST);
+
     }
 
     /**
@@ -81,15 +102,17 @@ public class Calendar implements ActionListener {
         for(var month : Month.values()){
             var buttonMonth = new JButton(month.getTypeText());
             buttonMonth.addActionListener(this);
+            monthButton.add(buttonMonth);
             monthPanel.add(buttonMonth);
         }
+        centerPanel.add(monthPanel, BorderLayout.CENTER);
         addYear.addActionListener(this);
+        calculator.addActionListener(this);
         yearPanel.add(addYear);
         createButton(2020);
         createButton(2021);
         updateButton();
     }
-
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -104,9 +127,16 @@ public class Calendar implements ActionListener {
         }
 
         if(yearButton.contains(button)){
-            current_year = Integer.parseInt(button.getText());
-            System.out.println(current_year);
+            currentYear = Integer.parseInt(button.getText());
+            System.out.println(currentYear);
         }
-
+        if(monthButton.contains(button)){
+            currentMonth = Month.get(button.getText());
+            System.out.println(currentMonth);
+            System.out.println(currentYear);
+        }
+        if(o == calculator){
+            Run.runCalculator();
+        }
     }
 }

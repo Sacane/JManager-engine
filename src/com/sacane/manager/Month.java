@@ -1,5 +1,9 @@
 package com.sacane.manager;
 
+import com.sacane.calc.evaluator.BaseOperator;
+
+import java.util.Arrays;
+
 public enum Month {
 
     JANUARY("January", "01"),
@@ -31,5 +35,9 @@ public enum Month {
 
     String getRepresentation(){
         return representation;
+    }
+
+    public static Month get(String symbol) {
+        return Arrays.stream(Month.values()).filter(it -> it.typeText.equals(symbol)).findFirst().orElse(null);
     }
 }
