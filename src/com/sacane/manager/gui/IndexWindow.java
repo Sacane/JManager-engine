@@ -2,15 +2,14 @@ package com.sacane.manager.gui;
 import javax.swing.*;
 import java.awt.*;
 
-public class CalendarDesign extends JFrame {
+public class IndexWindow extends JFrame {
 
-    public CalendarDesign(){
+    public IndexWindow(){
         super();
         build();
         setTitle("JManager");
         setResizable(false);
     }
-
 
     private void build(){
         var calendar = new Calendar();
@@ -23,7 +22,4 @@ public class CalendarDesign extends JFrame {
         setContentPane(mainPanel);
         setJMenuBar(calendar.getMenu());
     }
-
-
-
 }

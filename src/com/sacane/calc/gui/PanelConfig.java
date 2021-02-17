@@ -28,9 +28,6 @@ public class PanelConfig {
         buttonPanel.add(action.getClear());
         buttonPanel.add(action.getCalculate());
 
-
-
-
         var text = action.getInput();
         text.setColumns(20);
         textPanel.add(text);

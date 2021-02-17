@@ -16,18 +16,18 @@ public class Calendar implements ActionListener {
     private final JMenuBar menu = new JMenuBar();
     private final ArrayList<JButton> yearButton = new ArrayList<>();
     private final ArrayList<JButton> monthButton = new ArrayList<>();
-    private final JPanel calendar = new JPanel();
-    private final JPanel yearPanel = new JPanel();
-    private final JPanel monthPanel = new JPanel();
-    private final JButton addYear = new JButton("add");
+    final JPanel calendar = new JPanel();
+    final JPanel yearPanel = new JPanel();
+    final JPanel monthPanel = new JPanel();
+    final JButton addYear = new JButton("add");
     private int currentYear;
     private int maxYear;
     private Month currentMonth;
     private final JButton calculator = new JButton("Calc");
-    private final JPanel centerPanel = new JPanel();
-    private final JPanel leftPanel = new JPanel();
-    private final JPanel rightPanel = new JPanel();
-    private final JPanel northPanel = new JPanel();
+    final JPanel centerPanel = new JPanel();
+    final JPanel leftPanel = new JPanel();
+    final JPanel rightPanel = new JPanel();
+    final JPanel northPanel = new JPanel();
 
     public Calendar(){
         //Set all the panel in the main panel
@@ -44,8 +44,6 @@ public class Calendar implements ActionListener {
         maxYear = 2021;
         currentYear = maxYear;
     }
-
-
 
     JPanel getCalendarPanel(){
         return calendar;
@@ -98,7 +96,6 @@ public class Calendar implements ActionListener {
      * set all the buttons in the main panel of the calendar
      */
     void setButton(){
-
         for(var month : Month.values()){
             var buttonMonth = new JButton(month.getTypeText());
             buttonMonth.addActionListener(this);
@@ -114,18 +111,18 @@ public class Calendar implements ActionListener {
         updateButton();
     }
 
+
     @Override
     public void actionPerformed(ActionEvent e) {
         var o = e.getSource();
         var button = (JButton)o;
         if(o == addYear){
-            maxYear +=1;
+            maxYear++;
             createButton(maxYear);
             updateButton();
             yearPanel.validate();
             yearPanel.repaint();
         }
-
         if(yearButton.contains(button)){
             currentYear = Integer.parseInt(button.getText());
             System.out.println(currentYear);

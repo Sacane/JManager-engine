@@ -1,39 +1,43 @@
---income manage the income and outcome that the user has done. 
+
+
+CREATE TABLE trans(
+    id_trans INTEGER PRIMARY KEY AUTOINCREMENT,
+    is_in boolean NOT NULL,
+    label VARCHAR(100) NOT NULL,
+    value float NOT NULL,
+    description text
+);
+
+--income manage the income and outcome that the user has done.
 
 CREATE TABLE income(
-    id_income INTEGER PRIMARY KEY,
-    date_inc date NOT NULL,
-    label VARCHAR(100) NOT NULL,
-    is_income boolean,
-    value_inc float NOT NULL,
-    description text
+    id_income INTEGER PRIMARY KEY REFERENCES trans(id_trans),
+    date date NOT NULL
 );
 
---Promises is a final income or outcome the user have to pay or will receive.
+--Promises is a final income or outcome the user have to pay or will receive in the future.
 
-CREATE TABLE promises(
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name VARCHAR(100) NOT NULL,
-    value float NOT NULL,
-    is_debt boolean NOT NULL,
-    name_owner VARCHAR(100) NOT NULL,
-    description text
+CREATE TABLE promise(
+    id_promise INTEGER PRIMARY KEY REFERENCES trans(id_trans),
+    name_owner VARCHAR(100) NOT NULL
 );
 
---Project are a intention to pay or receive money during a determinated period.
+--Project are a intention to pay or receive money during a determinate period.
 
 CREATE TABLE project(
-    id_project INTEGER PRIMARY KEY AUTOINCREMENT,
-    name_project VARCHAR(100) NOT NULL,
+    id_project INTEGER PRIMARY KEY REFERENCES trans(id_trans),
     day int,
-    is_income boolean NOT NULL,
-    value float NOT NULL,
     duration int 
 );
 
-CREATE TABLE self(
-    id_self INTEGER PRIMARY KEY AUTOINCREMENT,
-    name VARCHAR(100) NOT NULL,
-    firstName VARCHAR(100) NOT NULL,
+--Account are the location where are store the total amount of the user
+
+CREATE TABLE account(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name_account VARCHAR(100) NOT NULL,
     amount float NOT NULL
 );
+
+--income[1, z]
+--transaction[1, true, "baba", 200, "oui"]
+--SELECT * FROM income INNER JOIN transaction ON income.id_income = transaction.id_trans WHERE transaction.label = {label}

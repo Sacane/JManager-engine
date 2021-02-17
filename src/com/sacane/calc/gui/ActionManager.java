@@ -10,14 +10,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ActionManager implements ActionListener {
-
-
     public ActionManager() {
         setButtonNumber();
         setButtonOp();
     }
-
-
 
     //buttons
     private final ArrayList<JButton> buttonNumber = new ArrayList<>();
@@ -33,7 +29,6 @@ public class ActionManager implements ActionListener {
 
     //TextField
     private final JTextField input = new JTextField();
-
 
     //StringBuilders to build the label
     private final StringBuilder lines = new StringBuilder();
@@ -111,7 +106,7 @@ public class ActionManager implements ActionListener {
         return input;
     }
 
-    String getResult(String input){
+    private String getResult(String input){
         var kvl = new Keval();
 
         try {
@@ -131,15 +126,14 @@ public class ActionManager implements ActionListener {
     }
 
 
-    void updateHistory(String input){
+    private void updateHistory(String input){
         clearBuilder(lines);
         lines.append(beginOrEnd(true)).append(input).append(beginOrEnd(false));
     }
 
-    String beginOrEnd(boolean isBegin){
+    private String beginOrEnd(boolean isBegin){
         return (isBegin) ? "<html><body>" : "</body></html>";
     }
-
 
     @Override
     public void actionPerformed(ActionEvent e) {

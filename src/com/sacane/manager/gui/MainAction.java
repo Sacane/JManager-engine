@@ -13,10 +13,6 @@ public class MainAction implements ActionListener {
     private final JPanel rightPanel = new JPanel();
     private final JPanel southPanel = new JPanel();
 
-
-
-
-
     @Override
     public void actionPerformed(ActionEvent e) {
         var o = e.getSource();
