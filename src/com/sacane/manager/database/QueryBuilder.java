@@ -60,5 +60,11 @@ public class QueryBuilder {
         return "DELETE FROM promises WHERE name ='" + name + "'";
     }
 
+    public static String getNumberRow(){
+        return "SELECT COUNT(id_income) AS numberRow FROM income";
+    }
 
+    public static String selectTrans(String table){
+        return "SELECT date, label, value, description FROM " + table + " NATURAL JOIN trans";
+    }
 }

@@ -7,7 +7,6 @@ public class DataBuild {
 
     private Connection connection;
     private Statement statement;
-    private int totalAmount = -1;
 
     static String getPathToSql(){
         var pathJdbc = "jdbc:sqlite:";
@@ -58,8 +57,8 @@ public class DataBuild {
     }
 
     private ResultSet getAmount(boolean is_income) throws SQLException{
-        ResultSet res;
-        res = statement.executeQuery("SELECT value_inc FROM income WHERE is_income = " + is_income);
+
+        var res = statement.executeQuery("SELECT value_inc FROM income WHERE is_income = " + is_income);
         return res;
     }
 
@@ -77,7 +76,14 @@ public class DataBuild {
         return listIncome;
     }
 
+    public int getNumberRow() throws SQLException{
+        var res = statement.executeQuery(QueryBuilder.getNumberRow());
+        return res.getInt("numberRow");
+    }
 
+    public ResultSet getSetIncome() throws SQLException{
+        return statement.executeQuery(QueryBuilder.selectTrans("income"));
+    }
 
 
 }
