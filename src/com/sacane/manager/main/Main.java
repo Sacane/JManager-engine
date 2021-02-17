@@ -1,13 +1,9 @@
 package com.sacane.manager.main;
-
-import com.sacane.manager.testConnection;
+import com.sacane.manager.gui.IndexWindow;
 
 public class Main {
-    
     public static void main(String[] args) {
-        if(!testConnection.connectionSuccess()){
-            System.out.println("Error, cannot connect to the database");
-            System.exit(1);
-        }
+        var calendar = new IndexWindow();
+        calendar.setVisible(true);
     }
 }

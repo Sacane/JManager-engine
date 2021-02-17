@@ -22,8 +22,6 @@ public class WindowManager extends JFrame {
         setSize(WIDTH, HEIGHT);
         setLocationRelativeTo(null);
         setResizable(true);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
         setContentPane(panel);
     }
 }
