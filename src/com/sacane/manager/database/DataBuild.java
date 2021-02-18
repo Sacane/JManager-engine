@@ -22,7 +22,7 @@ public class DataBuild {
             connection = DriverManager.getConnection(getPathToSql());
             statement = connection.createStatement();
 
-            System.out.println("Connection to SQLite has been established.");
+            System.out.println("Connection to the database has been established.");
         } catch (SQLException | ClassNotFoundException e) {
             System.out.println(e.getMessage());
         }
@@ -84,6 +84,7 @@ public class DataBuild {
     public ResultSet getSetIncome() throws SQLException{
         return statement.executeQuery(QueryBuilder.selectTrans("income"));
     }
+
 
 
 }

@@ -65,6 +65,6 @@ public class QueryBuilder {
     }
 
     public static String selectTrans(String table){
-        return "SELECT date, label, value, description FROM " + table + " NATURAL JOIN trans";
+        return "SELECT date, label, value, is_in, description FROM " + table + " NATURAL JOIN trans";
     }
 }

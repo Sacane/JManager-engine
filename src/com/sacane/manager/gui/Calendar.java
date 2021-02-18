@@ -14,32 +14,39 @@ import java.util.ArrayList;
 public class Calendar implements ActionListener {
 
     private final JMenuBar menu = new JMenuBar();
+
     private final ArrayList<JButton> yearButton = new ArrayList<>();
     private final ArrayList<JButton> monthButton = new ArrayList<>();
+
     final JPanel calendar = new JPanel();
     final JPanel yearPanel = new JPanel();
     final JPanel monthPanel = new JPanel();
+
     final JButton addYear = new JButton("add");
+
     private int currentYear;
     private int maxYear;
     private Month currentMonth;
+
     private final JButton calculator = new JButton("Calc");
+
     final JPanel centerPanel = new JPanel();
     final JPanel leftPanel = new JPanel();
     final JPanel rightPanel = new JPanel();
     final JPanel northPanel = new JPanel();
 
     public Calendar(){
+
         //Set all the panel in the main panel
         centerPanel.setLayout(new FlowLayout());
         leftPanel.setLayout(new FlowLayout());
         rightPanel.setLayout(new BorderLayout());
         northPanel.setLayout(new BorderLayout());
 
-
         calendar.setLayout(new BorderLayout());
         yearPanel.setLayout(new GridLayout(15, 3));
         monthPanel.setLayout(new GridLayout(3, 4));
+
         buildPanel();
         maxYear = 2021;
         currentYear = maxYear;
@@ -109,6 +116,7 @@ public class Calendar implements ActionListener {
         createButton(2020);
         createButton(2021);
         updateButton();
+        monthPanel.setVisible(false);
     }
 
 
@@ -125,7 +133,7 @@ public class Calendar implements ActionListener {
         }
         if(yearButton.contains(button)){
             currentYear = Integer.parseInt(button.getText());
-            System.out.println(currentYear);
+            monthPanel.setVisible(true);
         }
         if(monthButton.contains(button)){
             currentMonth = Month.get(button.getText());

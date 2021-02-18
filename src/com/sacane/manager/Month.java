@@ -6,32 +6,35 @@ import java.util.Arrays;
 
 public enum Month {
 
-    JANUARY("January", "01"),
-    FEBRUARY("February", "02"),
-    MARCH("March", "03"),
-    APRIL("April", "04"),
-    MAY("May", "05"),
-    JUNE("June", "06"),
-    JULY("July", "07"),
-    AUGUST("August", "08"),
-    SEPTEMBER("September", "09"),
-    OCTOBER("October", "10"),
-    NOVEMBER("November", "11"),
-    DECEMBER("December", "12");
+    JANUARY("January", "01", 31),
+    FEBRUARY("February", "02", 29),
+    MARCH("March", "03", 31),
+    APRIL("April", "04", 30),
+    MAY("May", "05", 31),
+    JUNE("June", "06", 30),
+    JULY("July", "07", 31),
+    AUGUST("August", "08", 31),
+    SEPTEMBER("September", "09", 30),
+    OCTOBER("October", "10", 31),
+    NOVEMBER("November", "11", 30),
+    DECEMBER("December", "12", 31);
 
     private final String typeText;
     private final String representation;
+    private final int numberDay;
 
 
-
-    Month(String typeText, String representation){
+    Month(String typeText, String representation, int numberDay){
         this.typeText = typeText;
         this.representation = representation;
+        this.numberDay = numberDay;
     }
 
     public String getTypeText(){
         return typeText;
     }
+
+    public int getNumberDay(){ return numberDay; }
 
     String getRepresentation(){
         return representation;
