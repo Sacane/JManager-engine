@@ -2,7 +2,10 @@ package com.sacane.manager;
 
 import com.sacane.calc.evaluator.BaseOperator;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.IntStream;
 
 public enum Month {
 
@@ -36,11 +39,37 @@ public enum Month {
 
     public int getNumberDay(){ return numberDay; }
 
-    String getRepresentation(){
+    String representation(){
         return representation;
+    }
+
+    public List<Integer> buildArrayDays(){
+        List<Integer> daysList = new ArrayList<>();
+        IntStream.range(1, numberDay+1).forEach(
+                daysList::add
+        );
+        return daysList;
+    }
+
+    public static String formattedDate(int dayBegin, Month month, int year){
+        var formatDay = (dayBegin <= 9) ? "0" + dayBegin : String.valueOf(dayBegin);
+
+        return formatDay + "-" + month.representation() + "-"+ year;
+    }
+
+    public static Month getMonthByRep(int rep){
+        if(rep > 12){
+            rep = rep%12;
+        }
+        if(rep < 0){
+            throw new IllegalArgumentException("representation can't be negative");
+        }
+        int finalRep = rep;
+        return Arrays.stream(Month.values()).filter(it -> Integer.valueOf(it.representation).equals(finalRep)).findFirst().orElse(null);
     }
 
     public static Month get(String symbol) {
         return Arrays.stream(Month.values()).filter(it -> it.typeText.equals(symbol)).findFirst().orElse(null);
     }
+
 }

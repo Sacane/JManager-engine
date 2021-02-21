@@ -85,6 +85,8 @@ public class DataBuild {
         return statement.executeQuery(QueryBuilder.selectTrans("income"));
     }
 
-
+    public ResultSet getSetTotal() throws SQLException {
+        return statement.executeQuery(QueryBuilder.selectTotal());
+    }
 
 }

@@ -15,7 +15,7 @@ public class TableInitializer {
 
 
     private final ArrayList<String> titleArray;
-
+    private int total = 0;
 
     public TableInitializer(ArrayList<String> titleArray){
         Objects.requireNonNull(titleArray);
@@ -24,6 +24,12 @@ public class TableInitializer {
 
     Object[] buildTitles(){
         return titleArray.toArray();
+    }
+
+    void updateTotal(DataBuild builder) throws SQLException{
+        var array = builder.getSetTotal();
+        total = array.getInt("total");
+
     }
 
     Object[][] tableIncome(DataBuild builder) throws SQLException {
@@ -35,7 +41,7 @@ public class TableInitializer {
         for(int i = 0; set.next(); i++){
 
             var label = set.getString("label");
-            var description = set.getString("description");
+
             var date = set.getString("date");
             boolean is_in = Boolean.parseBoolean(set.getString("is_in"));
 
@@ -47,7 +53,7 @@ public class TableInitializer {
             data[i][0] = date;
             data[i][1] = label;
             data[i][2] = value;
-            data[i][3] = description;
+            data[i][3] = total;
 
         }
         return data;

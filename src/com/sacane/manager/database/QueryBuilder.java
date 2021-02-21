@@ -1,4 +1,6 @@
 package com.sacane.manager.database;
+import com.sacane.manager.Month;
+
 import java.util.Objects;
 
 
@@ -12,6 +14,15 @@ public class QueryBuilder {
         return "SELECT id_trans FROM trans WHERE label=" + "'" + label + "'";
     }
 
+    public static String deleteAccount(String nameAccount){
+        return "DELETE FROM account WHERE name_account = " + "'" + nameAccount + "'";
+    }
+
+    static String addAccount(String name_account, double amount){
+        return "INSERT INTO account VALUES(null," +
+                syntaxBuild(name_account, false) +
+                syntaxBuild(String.valueOf(amount), true) + ")";
+    }
     static String deleteTrans(String label){
         return "DELETE FROM trans WHERE label ='" + label + "'";
     }
@@ -67,4 +78,25 @@ public class QueryBuilder {
     public static String selectTrans(String table){
         return "SELECT date, label, value, is_in, description FROM " + table + " NATURAL JOIN trans";
     }
+
+
+    public static String selectTotalAmount(int monthRep, int year){
+
+        int nextMonthRep = (monthRep + 1) % 12;
+        var prevMonth = Month.getMonthByRep(monthRep);
+
+        var nextMonth = Month.getMonthByRep(nextMonthRep);
+
+        if(monthRep == 12) {
+            return "SELECT SUM(amount) as total FROM account WHERE date >= " + Month.formattedDate(1, prevMonth, year)
+                    + "AND date < " + Month.formattedDate(1, nextMonth, year+1);
+        }
+        return "SELECT SUM(amount) as total FROM account WHERE date >= " + Month.formattedDate(1, prevMonth, year)
+                + "AND date < " + Month.formattedDate(1, nextMonth, year+1);
+    }
+
+    public static String selectTotal(){
+        return "SELECT SUM(amount) as total FROM account";
+    }
+
 }
