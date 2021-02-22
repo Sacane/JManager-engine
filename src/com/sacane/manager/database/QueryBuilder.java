@@ -76,11 +76,12 @@ public class QueryBuilder {
     }
 
     public static String selectTrans(String table){
-        return "SELECT date, label, value, is_in, description FROM " + table + " NATURAL JOIN trans";
+        return "SELECT date, label, value, is_in, description FROM income NATURAL JOIN trans";
     }
 
 
-    public static String selectTotalAmount(int monthRep, int year){
+
+    public static String selectMonthInfos(int monthRep, int year){
 
         int nextMonthRep = (monthRep + 1) % 12;
         var prevMonth = Month.getMonthByRep(monthRep);
@@ -88,10 +89,10 @@ public class QueryBuilder {
         var nextMonth = Month.getMonthByRep(nextMonthRep);
 
         if(monthRep == 12) {
-            return "SELECT SUM(amount) as total FROM account WHERE date >= " + Month.formattedDate(1, prevMonth, year)
+            return "SELECT date, label, value, is_in, description FROM income NATURAL JOIN trans WHERE date >= " + Month.formattedDate(1, prevMonth, year)
                     + "AND date < " + Month.formattedDate(1, nextMonth, year+1);
         }
-        return "SELECT SUM(amount) as total FROM account WHERE date >= " + Month.formattedDate(1, prevMonth, year)
+        return "SELECT date, label, value, is_in, description FROM income NATURAL JOIN trans WHERE date >= " + Month.formattedDate(1, prevMonth, year)
                 + "AND date < " + Month.formattedDate(1, nextMonth, year+1);
     }
 

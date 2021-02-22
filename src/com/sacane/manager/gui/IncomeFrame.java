@@ -43,6 +43,7 @@ public class IncomeFrame extends JFrame {
 
 
     private void build(){
+        var listener = new TableListener(builder);
         setTitle("Income");
         ArrayList<String> titles = new ArrayList<>();
         titles.add("date");
@@ -62,7 +63,7 @@ public class IncomeFrame extends JFrame {
             JPanel panel = new JPanel();
             panel.add(pane);
             add(panel, BorderLayout.CENTER);
-            add(southPanel, BorderLayout.SOUTH);
+            add(listener.contentPanel(), BorderLayout.SOUTH);
             setSize(WIDTH, HEIGHT);
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -79,6 +80,5 @@ public class IncomeFrame extends JFrame {
         var incomeWindow = new IncomeFrame(builder);
         incomeWindow.setVisible(true);
         builder.close();
-        System.out.println(Month.getMonthByRep(15));
     }
 }

@@ -89,4 +89,8 @@ public class DataBuild {
         return statement.executeQuery(QueryBuilder.selectTotal());
     }
 
+    public ResultSet getSetByRequest(String request) throws SQLException {
+        return statement.executeQuery(request);
+
+    }
 }

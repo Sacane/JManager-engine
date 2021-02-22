@@ -52,7 +52,7 @@ public class TableInitializer {
 
             data[i][0] = date;
             data[i][1] = label;
-            data[i][2] = value;
+            data[i][2] = translateValue;
             data[i][3] = total;
 
         }

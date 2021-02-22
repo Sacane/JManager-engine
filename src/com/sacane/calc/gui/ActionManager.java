@@ -106,7 +106,7 @@ public class ActionManager implements ActionListener {
         return input;
     }
 
-    private String getResult(String input){
+    private String getResult(String input) throws KevalDSLException {
         var kvl = new Keval();
 
         try {
@@ -118,7 +118,7 @@ public class ActionManager implements ActionListener {
             else{
                 return input + " = " + evaluated + "<br/>";
             }
-        } catch (KevalDSLException | KevalInvalidExpressionException e) {
+        } catch (KevalInvalidExpressionException e) {
             return "Invalid expression<br/>";
         }catch(KevalZeroDivisionException kze){
             return "Expression division by zero<br/>";
@@ -155,7 +155,11 @@ public class ActionManager implements ActionListener {
             input.setText("");
         }
         if(src == calculate){
-            historyBuild.append(getResult(input.getText()));
+            try {
+                historyBuild.append(getResult(input.getText()));
+            } catch (KevalDSLException kevalDSLException) {
+                kevalDSLException.printStackTrace();
+            }
             updateHistory(historyBuild.toString());
             history.setText(lines.toString());
         }
