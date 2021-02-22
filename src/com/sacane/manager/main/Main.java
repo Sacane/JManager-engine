@@ -3,7 +3,7 @@ import com.sacane.manager.gui.IndexWindow;
 
 public class Main {
     public static void main(String[] args) {
-        var calendar = new IndexWindow();
-        calendar.setVisible(true);
+        var index = new IndexWindow();
+        index.setVisible(true);
     }
 }
