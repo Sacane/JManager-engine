@@ -18,7 +18,7 @@ public class QueryBuilder {
         return "DELETE FROM account WHERE name_account = " + "'" + nameAccount + "'";
     }
 
-    static String addAccount(String name_account, double amount){
+    public static String addAccount(String name_account, double amount){
         return "INSERT INTO account VALUES(null," +
                 syntaxBuild(name_account, false) +
                 syntaxBuild(String.valueOf(amount), true) + ")";
@@ -99,5 +99,7 @@ public class QueryBuilder {
     public static String selectTotal(){
         return "SELECT SUM(amount) as total FROM account";
     }
-
+    public static String selectAccount(){
+        return "SELECT name_account, amount FROM account" ;
+    }
 }

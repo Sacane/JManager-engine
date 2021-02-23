@@ -1,6 +1,11 @@
 package com.sacane.manager.gui;
+import com.sacane.calc.gui.WindowManager;
 import com.sacane.manager.database.DataBuild;
+import com.sacane.manager.database.QueryBuilder;
+
 import javax.swing.*;
+import java.awt.*;
+import java.sql.SQLException;
 
 
 public class AccountFrame extends JFrame {
@@ -8,46 +13,52 @@ public class AccountFrame extends JFrame {
     private final DataBuild builder;
 
     private final JPanel mainPanel = new JPanel();
-
-
-    private final JLabel name = new JLabel("name");
-    private final JLabel value = new JLabel("value");
-
-    private final JTextField nameAccount = new JTextField();
-    private final JTextField valueAccount = new JTextField();
-    private final JButton addAccount = new JButton("Add a new Account");
+    private final JPanel tablePanel = new JPanel();
 
 
 
     public AccountFrame(DataBuild builder){
         this.builder = builder;
         build();
+    }
 
+    void tableBuild() throws SQLException {
+        builder.connection();
+        tablePanel.setLayout(new GridLayout(2, 10));
+        builder.getSetByRequest(QueryBuilder.selectAccount());
+
+
+        builder.close();
     }
 
 
     void build(){
-        setSize(IncomeFrame.WIDTH, IncomeFrame.HEIGHT);
+
+        builder.connection();
+        var listener = new AccountListener(builder);
+        setLayout(new BorderLayout());
+        var account = new AccountListener(builder);
+        JPanel southPanel = new JPanel();
+        setSize(500, 500);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        mainPanel.add(name);
-        nameAccount.setColumns(10);
-        mainPanel.add(nameAccount);
 
-        mainPanel.add(value);
-        valueAccount.setColumns(10);
-        mainPanel.add(valueAccount);
-        mainPanel.add(addAccount);
-        add(mainPanel);
-
-
-
+        add(account.contentPanel(), BorderLayout.CENTER);
+        southPanel.add(listener.getMainPanel());
+        add(southPanel, BorderLayout.SOUTH);
+        validate();
+        repaint();
         setVisible(true);
+        builder.close();
     }
 
     public static void main(String[] args) {
         var builder = new DataBuild();
+        SwingUtilities.invokeLater(() -> {
 
-        var test = new AccountFrame(builder);
+            var test = new AccountFrame(builder);
+
+        });
+
     }
 }

@@ -30,12 +30,17 @@ public class DataBuild {
 
     public void close() {
         try {
-            connection.close();
+
             statement.close();
+            connection.close();
             System.out.println("All close successfully.");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public Statement getNewStatement() throws SQLException {
+        return connection.createStatement();
     }
 
     public void executeRequest(String request) throws SQLException{

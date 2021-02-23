@@ -37,20 +37,22 @@ public class TableListener implements ActionListener {
         panel.add(price);
         panel.add(putPrice);
         buildBox();
-
+        panel.add(box);
         panel.add(addIncome);
         return panel;
     }
 
     private void buildBox(){
-        try {
-            var set = builder.getSetByRequest("SELECT name FROM account");
-            while(set.next()){
-                box.addItem(set.getString("name"));
-            }
-        } catch (SQLException throwables) {
-            throwables.getMessage();
-        }
+//        try {
+//            var set = builder.getSetByRequest("SELECT name FROM account");
+//            while(set.next()){
+//                box.addItem(set.getString("name"));
+//            }
+//        } catch (SQLException throwables) {
+//            throwables.getMessage();
+//        }
+        box.addItem("Menu");
+        box.addItem("other");
     }
 
     @Override
