@@ -3,7 +3,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class DataBuild {
+public class DbHandler {
 
     private Connection connection;
     private Statement statement;
@@ -33,7 +33,7 @@ public class DataBuild {
 
             statement.close();
             connection.close();
-            System.out.println("All close successfully.");
+            System.out.println("database closed successfully.");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -86,8 +86,17 @@ public class DataBuild {
         return res.getInt("numberRow");
     }
 
+    public int getNumberRowAccount() throws SQLException{
+        var res = statement.executeQuery(QueryBuilder.getNumberRowAccount());
+        return res.getInt("numberRow");
+    }
+
     public ResultSet getSetIncome() throws SQLException{
         return statement.executeQuery(QueryBuilder.selectTrans("income"));
+    }
+
+    public ResultSet getSetAccount() throws SQLException{
+        return statement.executeQuery(QueryBuilder.selectAccount());
     }
 
     public ResultSet getSetTotal() throws SQLException {

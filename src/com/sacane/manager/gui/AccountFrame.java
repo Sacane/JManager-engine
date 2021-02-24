@@ -1,59 +1,47 @@
 package com.sacane.manager.gui;
-import com.sacane.calc.gui.WindowManager;
-import com.sacane.manager.database.DataBuild;
+import com.sacane.manager.database.DbHandler;
 import com.sacane.manager.database.QueryBuilder;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 
 public class AccountFrame extends JFrame {
 
-    private final DataBuild builder;
+    private final DbHandler builder;
 
     private final JPanel mainPanel = new JPanel();
     private final JPanel tablePanel = new JPanel();
 
-
-
-    public AccountFrame(DataBuild builder){
+    public AccountFrame(DbHandler builder){
         this.builder = builder;
         build();
     }
 
-    void tableBuild() throws SQLException {
-        builder.connection();
-        tablePanel.setLayout(new GridLayout(2, 10));
-        builder.getSetByRequest(QueryBuilder.selectAccount());
-
-
-        builder.close();
-    }
-
 
     void build(){
+        var account = new AccountListener(builder, this);
+        setTitle("Account Window");
 
+        mainPanel.setLayout(new BorderLayout());
         builder.connection();
-        var listener = new AccountListener(builder);
         setLayout(new BorderLayout());
-        var account = new AccountListener(builder);
-        JPanel southPanel = new JPanel();
-        setSize(500, 500);
+        setSize(600, 700);
+        setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        mainPanel.add(account.getMainPanel(), BorderLayout.CENTER);
 
-
-        add(account.contentPanel(), BorderLayout.CENTER);
-        southPanel.add(listener.getMainPanel());
-        add(southPanel, BorderLayout.SOUTH);
-        validate();
-        repaint();
+        setContentPane(mainPanel);
         setVisible(true);
+        account.buildTable();
         builder.close();
     }
 
     public static void main(String[] args) {
-        var builder = new DataBuild();
+        var builder = new DbHandler();
         SwingUtilities.invokeLater(() -> {
 
             var test = new AccountFrame(builder);

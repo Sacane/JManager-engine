@@ -5,7 +5,6 @@ import java.awt.*;
 public class IndexWindow extends JFrame {
 
     public IndexWindow(){
-        super();
         build();
         setTitle("JManager");
         setResizable(false);

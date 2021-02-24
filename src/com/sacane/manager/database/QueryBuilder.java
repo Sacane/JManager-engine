@@ -75,6 +75,10 @@ public class QueryBuilder {
         return "SELECT COUNT(id_income) AS numberRow FROM income";
     }
 
+    public static String getNumberRowAccount(){
+        return "SELECT COUNT(id) AS numberRow FROM account";
+    }
+
     public static String selectTrans(String table){
         return "SELECT date, label, value, is_in, description FROM income NATURAL JOIN trans";
     }

@@ -1,40 +1,51 @@
 package com.sacane.manager.gui;
 
-import com.sacane.manager.database.DataBuild;
+import com.sacane.manager.database.DbHandler;
 import com.sacane.manager.database.QueryBuilder;
 
 import javax.swing.*;
-
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class AccountListener implements ActionListener {
 
     private final JLabel name = new JLabel("name");
     private final JLabel value = new JLabel("value");
 
+
     private final JTextField nameAccount = new JTextField();
     private final JTextField valueAccount = new JTextField();
     private final JButton addAccount = new JButton("Add a new Account");
 
+    private JTable table = null;
+    private DefaultTableModel model = null;
+
     private final JLabel nameDelete = new JLabel("name to delete");
     private final JTextField insertNameDelete = new JTextField();
     private final JButton deleteAccount = new JButton("delete");
-    private DataBuild builder;
+    private final DbHandler builder;
+
+    private final JFrame mainFrame;
 
     private final JPanel mainPanel = new JPanel();
 
-    public AccountListener(DataBuild builder){
+    public AccountListener(DbHandler builder, JFrame mainFrame){
         this.builder = builder;
-        mainPanel.setLayout(new GridLayout(4, 10));
+
+        this.mainFrame = mainFrame;
+        contentPanel();
     }
 
-    public JPanel contentPanel(){
+    static double updateTotal(DbHandler builder) throws SQLException{
+        var array = builder.getSetTotal();
+        return array.getInt("total");
+    }
 
-        JPanel mainPanel = new JPanel();
-
+    public void contentPanel(){
 
         mainPanel.add(name);
         nameAccount.setColumns(10);
@@ -54,63 +65,67 @@ public class AccountListener implements ActionListener {
         deleteAccount.addActionListener(this);
         mainPanel.add(deleteAccount);
 
-
-
-        return mainPanel;
     }
+
+
 
     public JPanel getMainPanel() {
-        try {
-            contentTablePanel();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
         return mainPanel;
     }
 
-    public void contentTablePanel() throws SQLException {
-        builder.connection();
 
+    public void buildTable(){
+        var titles = new ArrayList<String>();
+        titles.add("name account");
+        titles.add("amount");
+        var initializer = new TableInitializer(titles);
 
+        try{
+            model = new DefaultTableModel(initializer.tableAccount(builder),
+                    initializer.buildTitles());
+            table = new JTable(model);
 
-        var array = builder.getSetByRequest("SELECT name_account, amount FROM account");
-        while(array.next()){
-            mainPanel.add(new JLabel(array.getString("name_account")));
-            mainPanel.add(new JLabel(String.valueOf(array.getDouble("amount"))));
+            table.setShowGrid(true);
+            table.setShowVerticalLines(true);
+
+            JScrollPane pane = new JScrollPane(table);
+            JPanel panel = new JPanel();
+            panel.add(pane);
+            mainPanel.add(panel, BorderLayout.SOUTH);
+        }catch(SQLException sqe){
+            System.out.println(sqe.getMessage());
         }
-        mainPanel.validate();
-        mainPanel.repaint();
-        builder.close();
     }
+
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
 
         var o = e.getSource();
+
         builder.connection();
 
         if(o == addAccount){
             try {
-
                 if(!nameAccount.getText().equals("") && !valueAccount.getText().equals("")) {
                     builder.executeRequest(QueryBuilder.addAccount(nameAccount.getText(), Double.parseDouble(valueAccount.getText())));
                 }
-                contentTablePanel();
-                mainPanel.validate();
-                mainPanel.repaint();
+
+                model.fireTableDataChanged();
+
+
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
                 System.exit(1);
             }
-
         }
         if(o == deleteAccount){
             try {
-                var statement = builder.getNewStatement();
                 if(!insertNameDelete.getText().equals("")) {
-                    statement.executeUpdate("DELETE FROM account WHERE name_account =" + "'" + insertNameDelete.getText() +"'");
+                    builder.executeRequest("DELETE FROM account WHERE name_account =" + "'" + insertNameDelete.getText() +"'");
                 }
-
+                model.fireTableDataChanged();
             } catch (SQLException ex) {
                 System.out.println(ex.getMessage());
                 System.exit(1);

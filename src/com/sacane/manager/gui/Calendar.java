@@ -78,7 +78,6 @@ public class Calendar implements ActionListener {
         calendar.add(rightPanel, BorderLayout.EAST);
         calendar.add(centerPanel, BorderLayout.CENTER);
         calendar.add(menu, BorderLayout.NORTH);
-//        calendar.add(yearPanel, BorderLayout.WEST);
         calendar.add(leftPanel, BorderLayout.WEST);
 
     }

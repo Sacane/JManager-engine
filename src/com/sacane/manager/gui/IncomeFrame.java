@@ -1,7 +1,6 @@
 package com.sacane.manager.gui;
 
-import com.sacane.manager.Month;
-import com.sacane.manager.database.DataBuild;
+import com.sacane.manager.database.DbHandler;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -12,49 +11,42 @@ import java.util.Objects;
 
 public class IncomeFrame extends JFrame {
 
-    public static final int WIDTH = 1080;
-    public static final int HEIGHT = 800;
-
-    private final DataBuild builder;
+    public static final int WIDTH = 700;
+    public static final int HEIGHT = 700;
 
 
+    private final DbHandler builder;
+    private double total;
 
-    //Management of the incomes
-    private final JPanel southPanel = new JPanel();
-
-
-
-
-    public IncomeFrame(DataBuild builder){
+    public IncomeFrame(DbHandler builder){
         super();
         setLayout(new FlowLayout());
         Objects.requireNonNull(builder);
         this.builder = builder;
+        try {
+            this.total = AccountListener.updateTotal(builder);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         build();
 
     }
-
-
-
     private void buildSouthPanel(){
 
     }
-
-
-
     private void build(){
-        var listener = new TableListener(builder);
+        var listener = new IncomeListener(builder);
         setTitle("Income");
         ArrayList<String> titles = new ArrayList<>();
         titles.add("date");
         titles.add("label");
         titles.add("value");
-        titles.add("Sold");
+        titles.add("Total Sold");
 
         var initializer = new TableInitializer(titles);
 
         try {
-            var model = new DefaultTableModel(initializer.tableIncome(builder),
+            var model = new DefaultTableModel(initializer.tableIncome(builder, total),
                     initializer.buildTitles());
             var table = new JTable(model);
             table.setShowGrid(true);
@@ -75,7 +67,7 @@ public class IncomeFrame extends JFrame {
 
 
     public static void main(String[] args) {
-        var builder = new DataBuild();
+        var builder = new DbHandler();
         builder.connection();
         var incomeWindow = new IncomeFrame(builder);
         incomeWindow.setVisible(true);
