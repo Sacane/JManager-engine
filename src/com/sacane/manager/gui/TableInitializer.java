@@ -20,7 +20,7 @@ public class TableInitializer {
         this.titleArray = new ArrayList<>(titleArray);
     }
 
-    Object[] buildTitles(){
+    public Object[] buildTitles(){
         return titleArray.toArray();
     }
 

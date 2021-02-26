@@ -24,7 +24,7 @@ public class IncomeFrame extends JFrame {
         Objects.requireNonNull(builder);
         this.builder = builder;
         try {
-            this.total = AccountListener.updateTotal(builder);
+            this.total = Account.updateTotal(builder);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

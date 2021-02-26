@@ -1,8 +1,6 @@
 package com.sacane.manager.gui;
-
 import com.sacane.manager.database.DbHandler;
 import com.sacane.manager.database.QueryBuilder;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -11,7 +9,13 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class AccountListener implements ActionListener {
+public class Account extends JFrame implements ActionListener {
+
+
+    private final DbHandler builder;
+
+    private final JPanel mainPanel = new JPanel();
+    private final JPanel tablePanel = new JPanel();
 
     private final JLabel name = new JLabel("name");
     private final JLabel value = new JLabel("value");
@@ -27,17 +31,33 @@ public class AccountListener implements ActionListener {
     private final JLabel nameDelete = new JLabel("name to delete");
     private final JTextField insertNameDelete = new JTextField();
     private final JButton deleteAccount = new JButton("delete");
-    private final DbHandler builder;
 
-    private final JFrame mainFrame;
+    private final JPanel actionPanel = new JPanel();
 
-    private final JPanel mainPanel = new JPanel();
-
-    public AccountListener(DbHandler builder, JFrame mainFrame){
+    Account(DbHandler builder){
         this.builder = builder;
-
-        this.mainFrame = mainFrame;
+        build();
         contentPanel();
+    }
+
+
+    private void build(){
+
+        setTitle("Account Window");
+
+        mainPanel.setLayout(new BorderLayout());
+        builder.connection();
+        setLayout(new BorderLayout());
+        setSize(600, 700);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        buildTable();
+        mainPanel.add(actionPanel, BorderLayout.CENTER);
+
+        setContentPane(mainPanel);
+        setVisible(true);
+
+        builder.close();
     }
 
     static double updateTotal(DbHandler builder) throws SQLException{
@@ -45,63 +65,47 @@ public class AccountListener implements ActionListener {
         return array.getInt("total");
     }
 
-    public void contentPanel(){
-
-        mainPanel.add(name);
-        nameAccount.setColumns(10);
-        mainPanel.add(nameAccount);
-
-        mainPanel.add(value);
-        valueAccount.setColumns(10);
-        mainPanel.add(valueAccount);
-
-        addAccount.addActionListener(this);
-        mainPanel.add(addAccount);
-
-        mainPanel.add(nameDelete);
-        insertNameDelete.setColumns(10);
-        mainPanel.add(insertNameDelete);
-
-        deleteAccount.addActionListener(this);
-        mainPanel.add(deleteAccount);
-
-    }
-
-
-
-    public JPanel getMainPanel() {
-        return mainPanel;
-    }
-
-
     public void buildTable(){
         var titles = new ArrayList<String>();
         titles.add("name account");
         titles.add("amount");
         var initializer = new TableInitializer(titles);
-
         try{
             model = new DefaultTableModel(initializer.tableAccount(builder),
                     initializer.buildTitles());
             table = new JTable(model);
-
             table.setShowGrid(true);
             table.setShowVerticalLines(true);
 
             JScrollPane pane = new JScrollPane(table);
             JPanel panel = new JPanel();
             panel.add(pane);
-            mainPanel.add(panel, BorderLayout.SOUTH);
+            actionPanel.add(panel, BorderLayout.SOUTH);
         }catch(SQLException sqe){
             System.out.println(sqe.getMessage());
         }
     }
 
+    public void contentPanel(){
 
+        actionPanel.add(name);
+        nameAccount.setColumns(10);
+        actionPanel.add(nameAccount);
+        actionPanel.add(value);
+        valueAccount.setColumns(10);
+        actionPanel.add(valueAccount);
+        addAccount.addActionListener(this);
+        actionPanel.add(addAccount);
+        actionPanel.add(nameDelete);
+        insertNameDelete.setColumns(10);
+        actionPanel.add(insertNameDelete);
+        deleteAccount.addActionListener(this);
+        actionPanel.add(deleteAccount);
+
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
         var o = e.getSource();
 
         builder.connection();
@@ -132,5 +136,15 @@ public class AccountListener implements ActionListener {
             }
         }
         builder.close();
+    }
+
+    public static void main(String[] args) {
+        var builder = new DbHandler();
+        SwingUtilities.invokeLater(() -> {
+
+            var test = new Account(builder);
+
+        });
+
     }
 }
