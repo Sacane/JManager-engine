@@ -23,4 +23,9 @@ public class IncomeManager {
     public String getName_label() {
         return name_label;
     }
+
+    public void setValue(double value) {
+        this.value = value;
+    }
+
 }
