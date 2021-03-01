@@ -13,8 +13,6 @@ import java.util.List;
 
 public class AccountModel extends AbstractTableModel {
 
-    private ResultSet accountSet;
-    private final DbHandler handler = new DbHandler();
     private AccountService service;
     private List<AccountManager> account;
 

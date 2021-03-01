@@ -38,14 +38,6 @@ public class IncomeListener implements ActionListener {
     }
 
     private void buildBox(){
-//        try {
-//            var set = builder.getSetByRequest("SELECT name FROM account");
-//            while(set.next()){
-//                box.addItem(set.getString("name"));
-//            }
-//        } catch (SQLException throwables) {
-//            throwables.getMessage();
-//        }
         box.addItem("Accounts");
         box.addItem("other");
     }

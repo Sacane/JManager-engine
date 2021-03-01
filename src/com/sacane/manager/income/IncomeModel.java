@@ -1,10 +1,11 @@
 package com.sacane.manager.income;
 
 import javax.swing.table.AbstractTableModel;
+import java.util.ArrayList;
 
 public class IncomeModel extends AbstractTableModel {
 
-
+    private final ArrayList<IncomeManager> manager = new ArrayList<>();
 
     @Override
     public int getRowCount() {

@@ -56,6 +56,14 @@ public class Calendar implements ActionListener {
         return calendar;
     }
 
+    public Month getCurrentMonth() {
+        return currentMonth;
+    }
+
+    public int getCurrentYear(){
+        return currentYear;
+    }
+
     public JMenuBar getMenu() {
         return menu;
     }

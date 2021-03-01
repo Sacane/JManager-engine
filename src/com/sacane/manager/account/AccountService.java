@@ -14,7 +14,6 @@ public class AccountService {
 
     private void loadByDb(){
 
-
         account = new ArrayList<>();
         dbHandler.connection();
 
