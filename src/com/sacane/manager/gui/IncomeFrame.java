@@ -1,5 +1,6 @@
 package com.sacane.manager.gui;
 
+import com.sacane.manager.account.AccountService;
 import com.sacane.manager.database.DbHandler;
 
 import javax.swing.*;
@@ -24,7 +25,7 @@ public class IncomeFrame extends JFrame {
         Objects.requireNonNull(builder);
         this.builder = builder;
         try {
-            this.total = Account.updateTotal(builder);
+            this.total = AccountService.updateTotal(builder);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -34,6 +35,7 @@ public class IncomeFrame extends JFrame {
     private void buildSouthPanel(){
 
     }
+
     private void build(){
         var listener = new IncomeListener(builder);
         setTitle("Income");

@@ -19,8 +19,22 @@ public class AccountModel extends AbstractTableModel {
     private List<AccountManager> account;
 
     public AccountModel(){
+        super();
+        this.fireTableDataChanged();
         service = AccountService.getInstance();
         account = service.findLastAccount();
+    }
+
+
+    public void actualiseModel(){
+
+        service = AccountService.getInstance();
+        account = service.findLastAccount();
+        int index = account.size();
+        System.out.println(index);
+        this.fireTableRowsUpdated(index-1, index);
+        this.fireTableRowsInserted(index-1, index);
+        this.fireTableStructureChanged();
     }
 
     private TableInitializer getInitializer(){
@@ -32,17 +46,6 @@ public class AccountModel extends AbstractTableModel {
     }
 
 
-
-    public ResultSet getAccountSet(DbHandler handler) {
-        handler.connection();
-        try {
-            accountSet = handler.getSetAccount();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        handler.close();
-        return accountSet;
-    }
 
     private Object[] getHeader(){
         return getInitializer().buildTitles();
@@ -66,14 +69,11 @@ public class AccountModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        switch(columnIndex){
-            case 0:
-                return account.get(rowIndex).getName();
-            case 1:
-                return account.get(rowIndex).getValue();
-            default:
-                throw new IllegalArgumentException("Index invalid");
-        }
+        return switch (columnIndex) {
+            case 0 -> account.get(rowIndex).getName();
+            case 1 -> account.get(rowIndex).getValue();
+            default -> throw new IllegalArgumentException("Index invalid");
+        };
     }
 
     @Override

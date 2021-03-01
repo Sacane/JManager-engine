@@ -12,14 +12,10 @@ public class AccountService {
     private List<AccountManager> account;
     private final DbHandler dbHandler = new DbHandler();
 
-
-
     private void loadByDb(){
-        if(account != null){
-            return;
-        }
-        account = new ArrayList<>();
 
+
+        account = new ArrayList<>();
         dbHandler.connection();
 
         try {
@@ -31,6 +27,11 @@ public class AccountService {
             e.printStackTrace();
         }
         dbHandler.close();
+    }
+
+    public static double updateTotal(DbHandler builder) throws SQLException{
+        var array = builder.getSetTotal();
+        return array.getInt("total");
     }
 
     public synchronized List<AccountManager> findLastAccount() {
