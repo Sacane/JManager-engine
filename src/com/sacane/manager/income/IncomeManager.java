@@ -12,6 +12,8 @@ public class IncomeManager {
         this.date = date;
     }
 
+
+
     public double getValue() {
         return value;
     }

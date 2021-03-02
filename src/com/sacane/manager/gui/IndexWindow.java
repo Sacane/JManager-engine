@@ -1,6 +1,5 @@
 package com.sacane.manager.gui;
 import javax.swing.*;
-import java.awt.*;
 
 public class IndexWindow extends JFrame {
 
@@ -11,7 +10,8 @@ public class IndexWindow extends JFrame {
     }
 
     private void build(){
-        var calendar = new Calendar();
+        var model = new ModelWrapper();
+        var calendar = new CalendarController(model);
         var mainPanel = new JPanel();
         setSize(FrameTool.WIDTH, FrameTool.HEIGHT);
         setLocationRelativeTo(null);

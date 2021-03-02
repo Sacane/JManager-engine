@@ -7,6 +7,13 @@ public class IncomeModel extends AbstractTableModel {
 
     private final ArrayList<IncomeManager> manager = new ArrayList<>();
 
+    private final IncomeService service = new IncomeService();
+
+
+    double getTotal(){
+        return service.getTotal();
+    }
+
     @Override
     public int getRowCount() {
         return 0;
