@@ -83,8 +83,6 @@ public class QueryBuilder {
         return "SELECT date, label, value, is_in, description FROM income NATURAL JOIN trans";
     }
 
-
-
     public static String selectMonthInfos(int monthRep, int year){
 
         int nextMonthRep = (monthRep + 1) % 12;

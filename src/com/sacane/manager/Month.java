@@ -39,7 +39,7 @@ public enum Month {
 
     public int getNumberDay(){ return numberDay; }
 
-    String representation(){
+    public String representation(){
         return representation;
     }
 

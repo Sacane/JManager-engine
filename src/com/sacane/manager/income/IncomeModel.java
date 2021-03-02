@@ -10,6 +10,7 @@ public class IncomeModel extends AbstractTableModel {
     private final IncomeService service = new IncomeService();
 
 
+
     double getTotal(){
         return service.getTotal();
     }

@@ -12,7 +12,6 @@ public class ModelWrapper {
     private int maxYear;
 
 
-
     public Month getCurrentMonth() {
         return currentMonth;
     }
@@ -20,8 +19,6 @@ public class ModelWrapper {
     public double getTotalSold() {
         return totalSold;
     }
-
-
 
     public int getCurrentYear() {
         return currentYear;
@@ -46,5 +43,15 @@ public class ModelWrapper {
     public void setMaxYear(int maxYear) {
         this.maxYear = maxYear;
     }
+
+    public String getDateByDay(int day) throws IllegalArgumentException{
+        if(day > currentMonth.getNumberDay() || day < 0){
+            throw new IllegalArgumentException("day is not available");
+        }
+
+        return Month.formattedDate(day, currentMonth, currentYear);
+
+    }
+
 }
 

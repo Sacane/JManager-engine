@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
-public class AccountFrame extends JFrame implements ActionListener {
+public class AccountVue extends JFrame implements ActionListener {
 
     private final AccountModel model = new AccountModel();
     private final JTable table;
@@ -27,7 +27,7 @@ public class AccountFrame extends JFrame implements ActionListener {
 
     private JScrollPane scroll;
 
-    public AccountFrame(){
+    public AccountVue(){
         super();
         setTitle("Account");
 //        setPreferredSize(new Dimension(600, 700));
