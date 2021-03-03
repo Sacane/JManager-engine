@@ -1,7 +1,10 @@
 package com.sacane.manager.gui;
 
 import com.sacane.manager.Month;
+import com.sacane.manager.database.DbHandler;
 import com.sacane.manager.income.IncomeModel;
+
+import java.sql.SQLException;
 
 public class ModelWrapper {
 
@@ -10,6 +13,8 @@ public class ModelWrapper {
     private Month currentMonth;
     private double totalSold;
     private int maxYear;
+    private final DbHandler handler = new DbHandler();
+
 
 
     public Month getCurrentMonth() {
@@ -17,12 +22,15 @@ public class ModelWrapper {
     }
 
     public double getTotalSold() {
+
         return totalSold;
     }
 
     public int getCurrentYear() {
         return currentYear;
     }
+
+
 
     public int getMaxYear() {
         return maxYear;

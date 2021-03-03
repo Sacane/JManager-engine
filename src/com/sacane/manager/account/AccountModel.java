@@ -15,12 +15,14 @@ public class AccountModel extends AbstractTableModel {
 
     private AccountService service;
     private List<AccountManager> account;
+    private TableInitializer initializer;
 
     public AccountModel(){
         super();
         this.fireTableDataChanged();
         service = AccountService.getInstance();
         account = service.findLastAccount();
+        this.initializer = getInitializer();
     }
 
 
@@ -46,7 +48,7 @@ public class AccountModel extends AbstractTableModel {
 
 
     private Object[] getHeader(){
-        return getInitializer().buildTitles();
+        return initializer.buildTitles();
     }
 
     @Override

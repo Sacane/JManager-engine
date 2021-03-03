@@ -11,7 +11,7 @@ public class IncomeController implements ActionListener {
 
     // fields to manage the table
 
-    private final IncomeModel model = new IncomeModel();
+    private IncomeModel model;
     private JTable table;
 
 
@@ -21,20 +21,23 @@ public class IncomeController implements ActionListener {
     private final JPanel northPanel = new JPanel();
 
     private final JPanel mainPanel = new JPanel();
-
+    private ModelWrapper wrapper;
 
     //design
     private final JLabel info = new JLabel("Total Sold : ");
     private final JLabel value;
 
 
-    public IncomeController(){
-
+    public IncomeController(ModelWrapper wrapper){
+        this.wrapper = wrapper;
+        model = new IncomeModel(wrapper);
         table = new JTable(model);
         value = new JLabel((model.getTotal()) + " €");
         northPanel.add(info, BorderLayout.CENTER);
         northPanel.add(value, BorderLayout.CENTER);
+        southPanel.add(new JScrollPane(table), BorderLayout.CENTER);
         mainPanel.add(northPanel, BorderLayout.NORTH);
+        mainPanel.add(southPanel, BorderLayout.CENTER);
 
     }
 

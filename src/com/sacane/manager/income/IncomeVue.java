@@ -15,32 +15,32 @@ public class IncomeVue extends JFrame implements ActionListener {
 
     private JPanel mainPanel;
 
+    private ModelWrapper wrapper;
 
 
-    private final IncomeModel model = new IncomeModel();
+    private IncomeModel model;
 
 
     //panels
     private final JPanel southPanel = new JPanel();
     private final JPanel northPanel = new JPanel();
 
-    private final IncomeController controller = new IncomeController();
+    private IncomeController controller;
 
 
     //design
     private final JLabel info = new JLabel("Total Sold : ");
 
 
-    private ModelWrapper wrapper;
-
-    public IncomeVue(){
-
-        setSize(800, 500);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+    public IncomeVue(ModelWrapper wrapper){
+        this.wrapper = wrapper;
+        model = new IncomeModel(wrapper);
+        controller = new IncomeController(wrapper);
+        setSize(500, 500);
         setLocationRelativeTo(null);
         mainPanel = controller.getPane();
         setContentPane(mainPanel);
-        getContentPane().add(northPanel, BorderLayout.NORTH);
+        //getContentPane().add(northPanel, BorderLayout.NORTH);
     }
 
 
@@ -51,8 +51,11 @@ public class IncomeVue extends JFrame implements ActionListener {
         //TODO : do the function
     }
 
-    public static void main(String[] args) {
-        var test = new IncomeVue();
-        test.setVisible(true);
+    public static void launchIncome(ModelWrapper wrapper){
+        var launcher = new IncomeVue(wrapper);
+        launcher.setVisible(true);
+
     }
+
+
 }

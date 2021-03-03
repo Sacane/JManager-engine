@@ -32,7 +32,6 @@ public class AccountVue extends JFrame implements ActionListener {
         setTitle("Account");
 //        setPreferredSize(new Dimension(600, 700));
         setSize(800, 500);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         table = new JTable(model);
@@ -111,5 +110,10 @@ public class AccountVue extends JFrame implements ActionListener {
         }
         model.fireTableDataChanged();
         builder.close();
+    }
+
+    public static void runAccountPanel(){
+        var panel = new AccountVue();
+        panel.setVisible(true);
     }
 }

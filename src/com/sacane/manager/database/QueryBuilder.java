@@ -91,11 +91,11 @@ public class QueryBuilder {
         var nextMonth = Month.getMonthByRep(nextMonthRep);
 
         if(monthRep == 12) {
-            return "SELECT date, label, value, is_in, description FROM income NATURAL JOIN trans WHERE date >= " + Month.formattedDate(1, prevMonth, year)
-                    + "AND date < " + Month.formattedDate(1, nextMonth, year+1);
+            return "SELECT date, label, value, is_in FROM income NATURAL JOIN trans WHERE date >= " + Month.formattedDate(1, prevMonth, year)
+                    + " AND date < " + Month.formattedDate(1, nextMonth, year+1);
         }
-        return "SELECT date, label, value, is_in, description FROM income NATURAL JOIN trans WHERE date >= " + Month.formattedDate(1, prevMonth, year)
-                + "AND date < " + Month.formattedDate(1, nextMonth, year+1);
+        return "SELECT date, label, value, is_in FROM income NATURAL JOIN trans WHERE date >= " + Month.formattedDate(1, prevMonth, year)
+                + " AND date < " + Month.formattedDate(1, nextMonth, year);
     }
 
     public static String selectTotal(){

@@ -95,6 +95,8 @@ public class DbHandler {
         return statement.executeQuery(QueryBuilder.selectTrans("income"));
     }
 
+
+
     public ResultSet getSetAccount() throws SQLException{
         return statement.executeQuery(QueryBuilder.selectAccount());
     }

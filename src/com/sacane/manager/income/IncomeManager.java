@@ -2,12 +2,12 @@ package com.sacane.manager.income;
 
 public class IncomeManager {
     private double value;
-    private final String name_label;
+    private final String nameLabel;
     private final String date;
 
 
-    public IncomeManager(String name_label, double value, String date){
-        this.name_label = name_label;
+    public IncomeManager(String nameLabel, double value, String date){
+        this.nameLabel = nameLabel;
         this.value = value;
         this.date = date;
     }
@@ -22,8 +22,8 @@ public class IncomeManager {
         return date;
     }
 
-    public String getName_label() {
-        return name_label;
+    public String getNameLabel() {
+        return nameLabel;
     }
 
     public void setValue(double value) {

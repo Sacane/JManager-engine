@@ -3,6 +3,8 @@ package com.sacane.manager.gui;
 
 import com.sacane.calc.main.Run;
 import com.sacane.manager.Month;
+import com.sacane.manager.account.AccountVue;
+import com.sacane.manager.income.IncomeVue;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -18,7 +20,7 @@ public class CalendarController implements ActionListener {
 
     //Models
     private final ModelWrapper wrapper;
-
+    
 
     //dataStructures
     private final ArrayList<JButton> yearButton = new ArrayList<>();
@@ -32,12 +34,12 @@ public class CalendarController implements ActionListener {
 
     final JButton addYear = new JButton("add");
 
-    private int currentYear;
+    private final int currentYear;
     private int maxYear;
-    private Month currentMonth;
+
 
     private final JButton calculator = new JButton("Calc");
-
+    private final JButton accountButton = new JButton("Check your accounts");
     final JPanel centerPanel = new JPanel();
     final JPanel leftPanel = new JPanel();
     final JPanel rightPanel = new JPanel();
@@ -66,13 +68,7 @@ public class CalendarController implements ActionListener {
         return calendar;
     }
 
-    public Month getCurrentMonth() {
-        return currentMonth;
-    }
 
-    public int getCurrentYear(){
-        return currentYear;
-    }
 
     public JMenuBar getMenu() {
         return menu;
@@ -93,6 +89,7 @@ public class CalendarController implements ActionListener {
         setButton();
         leftPanel.add(yearPanel, FlowLayout.LEFT);
         rightPanel.add(calculator, BorderLayout.SOUTH);
+        centerPanel.add(accountButton, BorderLayout.SOUTH);
         calendar.add(rightPanel, BorderLayout.EAST);
         calendar.add(centerPanel, BorderLayout.CENTER);
         calendar.add(menu, BorderLayout.NORTH);
@@ -129,6 +126,7 @@ public class CalendarController implements ActionListener {
         centerPanel.add(monthPanel, BorderLayout.CENTER);
         addYear.addActionListener(this);
         calculator.addActionListener(this);
+        accountButton.addActionListener(this);
         yearPanel.add(addYear);
         createButton(2020);
         createButton(2021);
@@ -149,18 +147,18 @@ public class CalendarController implements ActionListener {
             yearPanel.repaint();
         }
         if(yearButton.contains(button)){
-            //currentYear = Integer.parseInt(button.getText());
             wrapper.setCurrentYear(Integer.parseInt(button.getText()));
             monthPanel.setVisible(true);
         }
         if(monthButton.contains(button)){
-//            currentMonth = Month.get(button.getText());
             wrapper.setCurrentMonth(Month.get(button.getText()));
-            System.out.println(wrapper.getCurrentMonth());
-            System.out.println(wrapper.getCurrentYear());
+            IncomeVue.launchIncome(wrapper);
         }
         if(o == calculator){
             Run.runCalculator();
+        }
+        if(o == accountButton){
+            AccountVue.runAccountPanel();
         }
     }
 }
