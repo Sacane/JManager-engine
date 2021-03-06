@@ -11,8 +11,7 @@ CREATE TABLE trans(
 --income manage the income and outcome that the user has done.
 
 CREATE TABLE income(
-    id_income INTEGER PRIMARY KEY AUTOINCREMENT,
-    transition INTEGER REFERENCES trans(id_trans),
+    id_income INTEGER PRIMARY KEY REFERENCES trans(id_trans),
     date date NOT NULL
 );
 

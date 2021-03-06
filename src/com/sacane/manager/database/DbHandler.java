@@ -1,4 +1,6 @@
 package com.sacane.manager.database;
+import com.sacane.manager.gui.ModelWrapper;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -22,7 +24,6 @@ public class DbHandler {
             connection = DriverManager.getConnection(getPathToSql());
             statement = connection.createStatement();
 
-            System.out.println("Connection to the database has been established.");
         } catch (SQLException | ClassNotFoundException e) {
             System.out.println(e.getMessage());
         }
@@ -33,7 +34,7 @@ public class DbHandler {
 
             statement.close();
             connection.close();
-            System.out.println("database closed successfully.");
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -49,8 +50,10 @@ public class DbHandler {
 
     public void addDbIncome(boolean is_in, String label, double value, String description, String date) throws SQLException {
         statement.executeUpdate(QueryBuilder.insertTrans(is_in, label, value, description));
-        statement.executeUpdate(QueryBuilder.insertIncome(getIdTrans(label), date));
+        statement.executeUpdate(QueryBuilder.insertIncome(ModelWrapper.getNumberTrans(), date));
     }
+
+
 
     public void addDbPromise(boolean is_in, String label, double value, String description, String name_owner)throws SQLException{
         statement.executeUpdate(QueryBuilder.insertTrans(is_in, label, value, description));

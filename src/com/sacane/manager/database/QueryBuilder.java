@@ -39,7 +39,7 @@ public class QueryBuilder {
     public static String insertIncome(int id_trans, String date){
         Objects.requireNonNull(date);
 
-        return "INSERT INTO INCOME VALUES (null," + syntaxBuild(String.valueOf(id_trans), false) + syntaxBuild(date, true) + ")";
+        return "INSERT INTO INCOME VALUES (" + syntaxBuild(String.valueOf(id_trans), false) + syntaxBuild(date, true) + ")";
     }
 
 
@@ -105,14 +105,14 @@ public class QueryBuilder {
         int nextMonthRep = (monthRep + 1) % 14;
         var prevMonth = Month.getMonthByRep(monthRep);
         var nextMonth = Month.getMonthByRep(nextMonthRep);
-        System.out.println("SELECT * FROM trans JOIN income i on trans.id_trans = i.transition WHERE date >= " + "'" + Month.formattedDate(1, prevMonth, year) + "'"
+        System.out.println("SELECT * FROM trans INNER JOIN income ON income.id_income = transaction.id_trans WHERE date >= " + "'" + Month.formattedDate(1, prevMonth, year) + "'"
                 + " AND date <= " + "'" + Month.formattedDate(1, nextMonth, year) + "'");
 
         if(monthRep == 12) {
-            return "SELECT * FROM trans JOIN income i on trans.id_trans = i.transition WHERE date >= " + Month.formattedDate(1, prevMonth, year)
-                    + " AND date <= " + Month.formattedDate(1, nextMonth, year+1);
+            return "SELECT * FROM trans INNER JOIN income ON income.id_income = trans.id_trans WHERE date >= " + "'" + Month.formattedDate(1, prevMonth, year) + "'"
+                    + " AND date <= " + "'" + Month.formattedDate(1, nextMonth, year+1) + "'";
         }
-        return "SELECT * FROM trans JOIN income i on trans.id_trans = i.transition WHERE date >= " + "'" + Month.formattedDate(1, prevMonth, year) + "'"
+        return "SELECT * FROM trans INNER JOIN income ON income.id_income = trans.id_trans WHERE date >= " + "'" + Month.formattedDate(1, prevMonth, year) + "'"
                 + " AND date <= " + "'" + Month.formattedDate(1, nextMonth, year) + "'";
     }
 

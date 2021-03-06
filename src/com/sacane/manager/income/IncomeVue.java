@@ -26,10 +26,13 @@ public class IncomeVue extends JFrame {
     }
 
 
-
+    void updateSold(){
+        controller.updateValue();
+    }
 
     public static void launchIncome(ModelWrapper wrapper){
         var launcher = new IncomeVue(wrapper);
+        launcher.updateSold();
         launcher.setVisible(true);
 
     }

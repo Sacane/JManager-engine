@@ -2,7 +2,6 @@ package com.sacane.manager.income;
 
 import com.sacane.manager.Month;
 import com.sacane.manager.database.DbHandler;
-import com.sacane.manager.database.QueryBuilder;
 import com.sacane.manager.gui.ModelWrapper;
 import com.sacane.manager.gui.TableInitializer;
 
@@ -52,7 +51,7 @@ public class IncomeController implements ActionListener {
         mainPanel.setLayout(new BorderLayout());
         model = new IncomeModel(wrapper);
         table = new JTable(model);
-        value = new JLabel((model.getTotal()) + " €");
+        value = new JLabel((wrapper.getTotalSold()) + " €");
 
         day = new JComboBox(TableInitializer.buildDayCheckBox(wrapper.getCurrentMonth().getNumberDay()));
         account = new JComboBox(TableInitializer.buildAccountCheckBox());
@@ -93,6 +92,16 @@ public class IncomeController implements ActionListener {
         }
     }
 
+
+
+    void updateValue(){
+        value.setText(String.valueOf(wrapper.updateSold()));
+        value.revalidate();
+        value.repaint();
+
+
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         var o = e.getSource();
@@ -101,10 +110,8 @@ public class IncomeController implements ActionListener {
                 var soldTyped = Double.parseDouble(putCost.getText());
                 try {
                     handler.connection();
-                    System.out.println(Month.formattedDate(Integer.parseInt(String.valueOf(day.getSelectedItem())),
-                            wrapper.getCurrentMonth(),
-                            wrapper.getCurrentYear()));
-                    handler.addDbIncome(soldTyped > 0,
+
+                    handler.addDbIncome(soldTyped >= 0,
                             labelName.getText(),
                             soldTyped,
                             "",
