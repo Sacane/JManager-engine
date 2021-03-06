@@ -1,6 +1,7 @@
 package com.sacane.manager.income;
 
 import com.google.common.collect.Table;
+import com.sacane.manager.account.AccountService;
 import com.sacane.manager.gui.ModelWrapper;
 import com.sacane.manager.gui.TableInitializer;
 
@@ -39,8 +40,17 @@ public class IncomeModel extends AbstractTableModel {
         return initializer.buildTitles();
     }
 
+    public void actualiseModel(){
+
+        income = service.findLastIncome();
+        int index = income.size();
+        this.fireTableRowsUpdated(index-1, index);
+        this.fireTableRowsInserted(index-1, index);
+        this.fireTableStructureChanged();
+    }
+
     double getTotal(){
-        return service.getTotal();
+        return wrapper.getTotalSold();
     }
 
     @Override

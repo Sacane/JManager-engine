@@ -56,11 +56,16 @@ public class DbHandler {
         statement.executeUpdate(QueryBuilder.insertTrans(is_in, label, value, description));
         statement.executeUpdate(QueryBuilder.insertPromises(getIdTrans(label), name_owner));
     }
+
     public void addDbProject(boolean is_in, String label, double value, String description, int day, int duration)throws SQLException{
         statement.executeUpdate(QueryBuilder.insertTrans(is_in, label, value, description));
         statement.executeUpdate(QueryBuilder.insertProject(getIdTrans(label), day, duration));
     }
 
+    public void deleteIncome(int id_trans) throws SQLException {
+        statement.executeUpdate(QueryBuilder.deleteIncome(id_trans));
+        statement.executeUpdate(QueryBuilder.deleteTrans(id_trans));
+    }
     private ResultSet getAmount(boolean is_income) throws SQLException{
 
         var res = statement.executeQuery("SELECT value_inc FROM income WHERE is_income = " + is_income);
@@ -68,8 +73,13 @@ public class DbHandler {
     }
 
     int getIdTrans(String label) throws SQLException{
+        connection();
+
         var res = statement.executeQuery(QueryBuilder.getIdTransaction(label));
-        return res.getInt("id_trans");
+        var ret = res.getInt("id_trans");
+        close();
+        return ret;
+
     }
 
     public ArrayList<Double> updateIncome(boolean is_income) throws SQLException{

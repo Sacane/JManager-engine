@@ -20,7 +20,7 @@ public class CalendarController implements ActionListener {
 
     //Models
     private final ModelWrapper wrapper;
-    
+
 
     //dataStructures
     private final ArrayList<JButton> yearButton = new ArrayList<>();
@@ -34,7 +34,6 @@ public class CalendarController implements ActionListener {
 
     final JButton addYear = new JButton("add");
 
-    private final int currentYear;
     private int maxYear;
 
 
@@ -61,7 +60,6 @@ public class CalendarController implements ActionListener {
 
         buildPanel();
         maxYear = 2021;
-        currentYear = maxYear;
     }
 
     JPanel getCalendarPanel(){
@@ -152,6 +150,7 @@ public class CalendarController implements ActionListener {
         }
         if(monthButton.contains(button)){
             wrapper.setCurrentMonth(Month.get(button.getText()));
+            System.out.println("current month : " + Month.get(button.getText()));
             IncomeVue.launchIncome(wrapper);
         }
         if(o == calculator){

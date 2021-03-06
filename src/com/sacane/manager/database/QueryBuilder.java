@@ -26,6 +26,9 @@ public class QueryBuilder {
     static String deleteTrans(String label){
         return "DELETE FROM trans WHERE label ='" + label + "'";
     }
+    static String deleteTrans(int id_trans){
+        return "DELETE FROM trans WHERE id_trans =" + id_trans;
+    }
 
     public static String insertTrans(boolean is_in, String label, double value, String description){
         Objects.requireNonNull(label);
@@ -36,7 +39,7 @@ public class QueryBuilder {
     public static String insertIncome(int id_trans, String date){
         Objects.requireNonNull(date);
 
-        return "INSERT INTO INCOME VALUES (" + syntaxBuild(String.valueOf(id_trans), false) + syntaxBuild(date, true) + ")";
+        return "INSERT INTO INCOME VALUES (null," + syntaxBuild(String.valueOf(id_trans), false) + syntaxBuild(date, true) + ")";
     }
 
 
@@ -85,17 +88,32 @@ public class QueryBuilder {
 
     public static String selectMonthInfos(int monthRep, int year){
 
-        int nextMonthRep = (monthRep + 1) % 12;
+        int nextMonthRep = (monthRep + 1) % 14;
         var prevMonth = Month.getMonthByRep(monthRep);
 
         var nextMonth = Month.getMonthByRep(nextMonthRep);
+        System.out.println("actual : " + prevMonth + " Next : " + nextMonth);
+        if(monthRep == 12) {
+            return "SELECT date, label, value, is_in FROM trans NATURAL JOIN income WHERE date >= " + Month.formattedDate(1, prevMonth, year)
+                    + " AND date <= " + Month.formattedDate(1, nextMonth, year+1);
+        }
+        return "SELECT date, label, value, is_in FROM trans NATURAL JOIN income WHERE date >= " + "'" + Month.formattedDate(1, prevMonth, year) + "'"
+                + " AND date <= " + "'" + Month.formattedDate(1, nextMonth, year) + "'";
+    }
+//SELECT * FROM trans JOIN income i on trans.id_trans = i.transition
+    public static String getIncomeMonth(int monthRep, int year){
+        int nextMonthRep = (monthRep + 1) % 14;
+        var prevMonth = Month.getMonthByRep(monthRep);
+        var nextMonth = Month.getMonthByRep(nextMonthRep);
+        System.out.println("SELECT * FROM trans JOIN income i on trans.id_trans = i.transition WHERE date >= " + "'" + Month.formattedDate(1, prevMonth, year) + "'"
+                + " AND date <= " + "'" + Month.formattedDate(1, nextMonth, year) + "'");
 
         if(monthRep == 12) {
-            return "SELECT date, label, value, is_in FROM income NATURAL JOIN trans WHERE date >= " + Month.formattedDate(1, prevMonth, year)
-                    + " AND date < " + Month.formattedDate(1, nextMonth, year+1);
+            return "SELECT * FROM trans JOIN income i on trans.id_trans = i.transition WHERE date >= " + Month.formattedDate(1, prevMonth, year)
+                    + " AND date <= " + Month.formattedDate(1, nextMonth, year+1);
         }
-        return "SELECT date, label, value, is_in FROM income NATURAL JOIN trans WHERE date >= " + Month.formattedDate(1, prevMonth, year)
-                + " AND date < " + Month.formattedDate(1, nextMonth, year);
+        return "SELECT * FROM trans JOIN income i on trans.id_trans = i.transition WHERE date >= " + "'" + Month.formattedDate(1, prevMonth, year) + "'"
+                + " AND date <= " + "'" + Month.formattedDate(1, nextMonth, year) + "'";
     }
 
     public static String selectTotal(){
@@ -104,4 +122,12 @@ public class QueryBuilder {
     public static String selectAccount(){
         return "SELECT name_account, amount FROM account" ;
     }
+
+    public static String getNumberAccount(){
+        return "SELECT COUNT(id) as count FROM account";
+    }
+    public static String getNameAccount(){
+        return "SELECT name_account FROM account";
+    }
+
 }

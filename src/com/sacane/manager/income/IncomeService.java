@@ -29,8 +29,10 @@ public class IncomeService {
         dbHandler.connection();
 
         try {
-            var set = dbHandler.getSetByRequest(QueryBuilder.selectMonthInfos(Integer.parseInt(wrapper.getCurrentMonth().representation()), wrapper.getCurrentYear()));
+            var set = dbHandler.getSetByRequest(QueryBuilder.getIncomeMonth(Integer.parseInt(wrapper.getCurrentMonth().representation()), wrapper.getCurrentYear()));
             while(set.next()){
+                System.out.println(set.getString("date"));
+                System.out.println(set.getDouble("value"));
                 income.add(new IncomeManager(set.getString("label"), set.getDouble("value"), set.getString("date")));
             }
         } catch (SQLException e) {
@@ -47,21 +49,7 @@ public class IncomeService {
         return income;
     }
 
-    double getTotal(){
-        dbHandler.connection();
-        var total = 0D;
-        try {
-            var dbSet = dbHandler.getSetTotal();
-            total = dbSet.getDouble("total");
-            dbHandler.close();
-            return total;
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            System.exit(1);
-        }
-        dbHandler.close();
-        return 0D;
-    }
+
 
     public static synchronized IncomeService getInstance(ModelWrapper wrapper) {
         if (instance == null) {

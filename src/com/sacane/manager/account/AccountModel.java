@@ -31,7 +31,6 @@ public class AccountModel extends AbstractTableModel {
         service = AccountService.getInstance();
         account = service.findLastAccount();
         int index = account.size();
-        System.out.println(index);
         this.fireTableRowsUpdated(index-1, index);
         this.fireTableRowsInserted(index-1, index);
         this.fireTableStructureChanged();

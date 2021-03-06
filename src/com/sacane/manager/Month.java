@@ -43,18 +43,13 @@ public enum Month {
         return representation;
     }
 
-    public List<Integer> buildArrayDays(){
-        List<Integer> daysList = new ArrayList<>();
-        IntStream.range(1, numberDay+1).forEach(
-                daysList::add
-        );
-        return daysList;
-    }
-
     public static String formattedDate(int dayBegin, Month month, int year){
+        if(month == null){
+            throw new IllegalArgumentException("Month null");
+        }
         var formatDay = (dayBegin <= 9) ? "0" + dayBegin : String.valueOf(dayBegin);
 
-        return formatDay + "-" + month.representation() + "-"+ year;
+        return year + "-" + month.representation() + "-" + formatDay;
     }
 
     public static Month getMonthByRep(int rep){

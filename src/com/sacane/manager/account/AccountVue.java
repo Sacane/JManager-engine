@@ -33,7 +33,6 @@ public class AccountVue extends JFrame implements ActionListener {
 //        setPreferredSize(new Dimension(600, 700));
         setSize(800, 500);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
         table = new JTable(model);
         scroll = new JScrollPane(table);
         getContentPane().add(scroll, BorderLayout.CENTER);

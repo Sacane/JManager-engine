@@ -2,27 +2,45 @@ package com.sacane.manager.gui;
 
 import com.sacane.manager.Month;
 import com.sacane.manager.database.DbHandler;
-import com.sacane.manager.income.IncomeModel;
 
 import java.sql.SQLException;
+
 
 public class ModelWrapper {
 
 
     private int currentYear;
     private Month currentMonth;
-    private double totalSold;
     private int maxYear;
     private final DbHandler handler = new DbHandler();
-
+    private double totalSold = updateSold();
 
 
     public Month getCurrentMonth() {
         return currentMonth;
     }
 
-    public double getTotalSold() {
+    public double updateSold() {
+        handler.connection();
+        var total = 0D;
+        try {
+            var dbSet = handler.getSetTotal();
+            total = dbSet.getDouble("total");
+            handler.close();
+            return total;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            System.exit(1);
+        }
+        handler.close();
+        return 0D;
+    }
 
+    public void update(){
+        totalSold = updateSold();
+    }
+
+    public double getTotalSold() {
         return totalSold;
     }
 
@@ -44,9 +62,7 @@ public class ModelWrapper {
         this.currentYear = currentYear;
     }
 
-    public void setTotalSold(double totalSold) {
-        this.totalSold = totalSold;
-    }
+
 
     public void setMaxYear(int maxYear) {
         this.maxYear = maxYear;
