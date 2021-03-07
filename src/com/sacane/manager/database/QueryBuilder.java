@@ -130,4 +130,8 @@ public class QueryBuilder {
         return "SELECT name_account FROM account";
     }
 
+    public static String dbUpdateSold(double value, String name_account){
+        return "UPDATE account SET amount = amount +'" + value + "' WHERE name_account = '" + name_account + "'";
+    }
+
 }

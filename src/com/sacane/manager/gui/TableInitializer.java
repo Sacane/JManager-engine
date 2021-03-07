@@ -15,7 +15,6 @@ public class TableInitializer {
 
 
     private final ArrayList<String> titleArray;
-    private int total = 0;
 
     public TableInitializer(ArrayList<String> titleArray){
         Objects.requireNonNull(titleArray);
@@ -26,10 +25,6 @@ public class TableInitializer {
         return titleArray.toArray();
     }
 
-    void updateTotal(DbHandler builder) throws SQLException{
-        var array = builder.getSetTotal();
-        total = array.getInt("total");
-    }
 
     Object[][] tableIncome(DbHandler builder, double total) throws SQLException {
         var nbRow = builder.getNumberRow();
@@ -130,11 +125,4 @@ public class TableInitializer {
     }
 
 
-    void buildTable(){
-
-    }
-
-    public JTable getTable(){
-        return null;
-    }
 }

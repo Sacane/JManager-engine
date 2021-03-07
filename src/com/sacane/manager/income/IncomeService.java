@@ -1,8 +1,6 @@
 package com.sacane.manager.income;
 
 
-import com.sacane.manager.Month;
-import com.sacane.manager.account.AccountService;
 import com.sacane.manager.database.DbHandler;
 import com.sacane.manager.database.QueryBuilder;
 import com.sacane.manager.gui.ModelWrapper;
@@ -44,14 +42,14 @@ public class IncomeService {
         dbHandler.close();
     }
 
-    public List<IncomeManager> findLastIncome(){
+    List<IncomeManager> findLastIncome(){
         loadByDb();
         return income;
     }
 
 
 
-    public static synchronized IncomeService getInstance(ModelWrapper wrapper) {
+    static synchronized IncomeService getInstance(ModelWrapper wrapper) {
         if (instance == null) {
             instance = new IncomeService(wrapper);
         }

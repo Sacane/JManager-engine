@@ -11,10 +11,9 @@ public class ModelWrapper {
 
     private int currentYear;
     private Month currentMonth;
-    private int maxYear;
+
     private final DbHandler handler = new DbHandler();
-    private double totalSold = updateSold();
-    private int totalTrans = getNumberTrans();
+    private final double totalSold = updateSold();
 
     public Month getCurrentMonth() {
         return currentMonth;
@@ -36,10 +35,6 @@ public class ModelWrapper {
         return 0D;
     }
 
-    public void update(){
-        totalSold = updateSold();
-
-    }
 
     public static int getNumberTrans(){
         var access = new DbHandler();
@@ -57,9 +52,6 @@ public class ModelWrapper {
         return 0;
     }
 
-    public void setTotalTrans(int totalTrans) {
-        this.totalTrans = totalTrans;
-    }
 
     public double getTotalSold() {
         return totalSold;
@@ -71,9 +63,6 @@ public class ModelWrapper {
 
 
 
-    public int getMaxYear() {
-        return maxYear;
-    }
 
     public void setCurrentMonth(Month currentMonth) {
         this.currentMonth = currentMonth;
@@ -85,18 +74,7 @@ public class ModelWrapper {
 
 
 
-    public void setMaxYear(int maxYear) {
-        this.maxYear = maxYear;
-    }
 
-    public String getDateByDay(int day) throws IllegalArgumentException{
-        if(day > currentMonth.getNumberDay() || day < 0){
-            throw new IllegalArgumentException("day is not available");
-        }
-
-        return Month.formattedDate(day, currentMonth, currentYear);
-
-    }
 
 }
 

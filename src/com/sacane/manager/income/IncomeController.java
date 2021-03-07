@@ -2,6 +2,7 @@ package com.sacane.manager.income;
 
 import com.sacane.manager.Month;
 import com.sacane.manager.database.DbHandler;
+import com.sacane.manager.database.QueryBuilder;
 import com.sacane.manager.gui.ModelWrapper;
 import com.sacane.manager.gui.TableInitializer;
 
@@ -43,6 +44,7 @@ public class IncomeController implements ActionListener {
 
     final JTextField deleteName = new JTextField();
     final JButton deleteButton = new JButton("delete Income");
+
     //db access
     private final DbHandler handler = new DbHandler();
 
@@ -92,14 +94,10 @@ public class IncomeController implements ActionListener {
         }
     }
 
-
-
     void updateValue(){
         value.setText(String.valueOf(wrapper.updateSold()));
         value.revalidate();
         value.repaint();
-
-
     }
 
     @Override
@@ -110,7 +108,6 @@ public class IncomeController implements ActionListener {
                 var soldTyped = Double.parseDouble(putCost.getText());
                 try {
                     handler.connection();
-
                     handler.addDbIncome(soldTyped >= 0,
                             labelName.getText(),
                             soldTyped,
@@ -120,10 +117,29 @@ public class IncomeController implements ActionListener {
                                     wrapper.getCurrentYear())
 
                     );
+                    handler.executeRequest(QueryBuilder.dbUpdateSold(Double.parseDouble(putCost.getText()), (String)account.getSelectedItem()));
+                    updateValue();
                     model.actualiseModel();
                     handler.close();
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
+                } catch (SQLException sqe) {
+                    System.out.println(sqe.getMessage());
+                    System.exit(1);
+                }
+            }
+        }
+        if(o == deleteButton){
+            if(!deleteName.getText().equals("")){
+                try{
+                    handler.connection();
+
+                    handler.deleteIncome(deleteName.getText());
+
+                    model.actualiseModel();
+
+                    handler.close();
+                }catch(SQLException ex){
+                    System.out.println(ex.getMessage());
+                    System.exit(1);
                 }
             }
         }

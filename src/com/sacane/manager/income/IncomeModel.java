@@ -1,7 +1,4 @@
 package com.sacane.manager.income;
-
-import com.google.common.collect.Table;
-import com.sacane.manager.account.AccountService;
 import com.sacane.manager.gui.ModelWrapper;
 import com.sacane.manager.gui.TableInitializer;
 
@@ -25,13 +22,11 @@ public class IncomeModel extends AbstractTableModel {
 
     }
 
-
-
     private TableInitializer getInitializer(){
         var titles = new ArrayList<String>();
-        titles.add("Label");
-        titles.add("cost");
         titles.add("date");
+        titles.add("Label");
+        titles.add("price");
 
         return new TableInitializer(titles);
     }
@@ -47,11 +42,9 @@ public class IncomeModel extends AbstractTableModel {
         this.fireTableRowsUpdated(index-1, index);
         this.fireTableRowsInserted(index-1, index);
         this.fireTableStructureChanged();
+        this.fireTableRowsDeleted(index-1, index);
     }
 
-    double getTotal(){
-        return wrapper.getTotalSold();
-    }
 
     @Override
     public int getRowCount() {
@@ -72,9 +65,9 @@ public class IncomeModel extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         return switch (columnIndex) {
-            case 0 -> income.get(rowIndex).getNameLabel();
-            case 1 -> income.get(rowIndex).getValue();
-            case 2 -> income.get(rowIndex).getDate();
+            case 0 -> income.get(rowIndex).getDate();
+            case 1 -> income.get(rowIndex).getNameLabel();
+            case 2 -> income.get(rowIndex).getValue();
             default -> throw new IllegalArgumentException("Index invalid");
         };
     }

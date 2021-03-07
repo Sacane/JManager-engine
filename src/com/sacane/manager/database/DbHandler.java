@@ -53,6 +53,18 @@ public class DbHandler {
         statement.executeUpdate(QueryBuilder.insertIncome(ModelWrapper.getNumberTrans(), date));
     }
 
+    public int getIdTransByLabel(String name_label) throws SQLException {
+        var sql = "SELECT id_trans FROM trans WHERE label = '" + name_label + "'";
+        var set = statement.executeQuery(sql);
+        var id = set.getInt("id_trans");
+        return id;
+    }
+
+    public void deleteIncome(String name_label) throws SQLException {
+        var id = getIdTransByLabel(name_label);
+        statement.executeUpdate("DELETE FROM income WHERE id_income =" + id);
+        statement.executeUpdate("DELETE FROM trans WHERE id_trans = " + id);
+    }
 
 
     public void addDbPromise(boolean is_in, String label, double value, String description, String name_owner)throws SQLException{

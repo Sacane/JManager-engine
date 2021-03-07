@@ -22,7 +22,6 @@ public class IncomeVue extends JFrame {
         setLocationRelativeTo(null);
         mainPanel = controller.getPane();
         setContentPane(mainPanel);
-        //getContentPane().add(northPanel, BorderLayout.NORTH);
     }
 
 

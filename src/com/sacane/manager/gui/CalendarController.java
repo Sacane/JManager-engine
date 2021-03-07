@@ -7,7 +7,6 @@ import com.sacane.manager.account.AccountVue;
 import com.sacane.manager.income.IncomeVue;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
