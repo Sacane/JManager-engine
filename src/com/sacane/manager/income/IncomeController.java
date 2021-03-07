@@ -40,10 +40,10 @@ public class IncomeController implements ActionListener {
     final JComboBox day;
     final JComboBox account;
 
-    final JButton addButton = new JButton("add Income");
+    final JButton addButton = new JButton("add label");
 
     final JTextField deleteName = new JTextField();
-    final JButton deleteButton = new JButton("delete Income");
+    final JButton deleteButton = new JButton("delete label");
 
     //db access
     private final DbHandler handler = new DbHandler();
@@ -59,6 +59,7 @@ public class IncomeController implements ActionListener {
         account = new JComboBox(TableInitializer.buildAccountCheckBox());
         northPanel.add(info, BorderLayout.CENTER);
         northPanel.add(value, BorderLayout.CENTER);
+        table.getColumnModel().getColumn(2).setCellRenderer(new PriceCellRenderer());
         southPanel.add(new JScrollPane(table), BorderLayout.CENTER);
         bottomPanel.add(label);
         labelName.setColumns(10);
@@ -120,6 +121,9 @@ public class IncomeController implements ActionListener {
                     handler.executeRequest(QueryBuilder.dbUpdateSold(Double.parseDouble(putCost.getText()), (String)account.getSelectedItem()));
                     updateValue();
                     model.actualiseModel();
+                    table.revalidate();
+                    table.repaint();
+
                     handler.close();
                 } catch (SQLException sqe) {
                     System.out.println(sqe.getMessage());
@@ -131,11 +135,8 @@ public class IncomeController implements ActionListener {
             if(!deleteName.getText().equals("")){
                 try{
                     handler.connection();
-
                     handler.deleteIncome(deleteName.getText());
-
                     model.actualiseModel();
-
                     handler.close();
                 }catch(SQLException ex){
                     System.out.println(ex.getMessage());

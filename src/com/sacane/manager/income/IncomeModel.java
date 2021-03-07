@@ -39,6 +39,7 @@ public class IncomeModel extends AbstractTableModel {
 
         income = service.findLastIncome();
         int index = income.size();
+        this.fireTableCellUpdated(index-1, index);
         this.fireTableRowsUpdated(index-1, index);
         this.fireTableRowsInserted(index-1, index);
         this.fireTableStructureChanged();
