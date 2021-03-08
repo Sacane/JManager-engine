@@ -12,6 +12,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
+
+/**
+ * Manage all the control in the IncomeFrame.
+ * @author Johan "Sacane" Ramaroson Rakotomihamina.
+ */
 public class IncomeController implements ActionListener {
 
     // fields to manage the table
@@ -48,6 +53,10 @@ public class IncomeController implements ActionListener {
     //db access
     private final DbHandler handler = new DbHandler();
 
+    /**
+     * Initialize a controller and create the panel.
+     * @param wrapper : ModelWrapper used to control the common model parts of the program.
+     */
     IncomeController(ModelWrapper wrapper){
         this.wrapper = wrapper;
         mainPanel.setLayout(new BorderLayout());
@@ -82,10 +91,19 @@ public class IncomeController implements ActionListener {
 
     }
 
+
+    /**
+     * @return JPanel of the Income Window.
+     */
     JPanel getPane(){
         return mainPanel;
     }
 
+    /**
+     *
+     * @param number : String representing the number to check.
+     * @return true if the number is a number, false elsewhere.
+     */
     private boolean isDouble(String number){
         try{
             Double.parseDouble(number);
@@ -95,6 +113,9 @@ public class IncomeController implements ActionListener {
         }
     }
 
+    /**
+     * update the value according to the sum of the sold.
+     */
     void updateValue(){
         value.setText(String.valueOf(wrapper.updateSold()));
         value.revalidate();
