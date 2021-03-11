@@ -66,7 +66,6 @@ public class DbHandler {
         statement.executeUpdate("DELETE FROM trans WHERE id_trans = " + id);
     }
 
-
     public void addDbPromise(boolean is_in, String label, double value, String description, String name_owner)throws SQLException{
         statement.executeUpdate(QueryBuilder.insertTrans(is_in, label, value, description));
         statement.executeUpdate(QueryBuilder.insertPromises(getIdTrans(label), name_owner));
@@ -132,6 +131,5 @@ public class DbHandler {
 
     public ResultSet getSetByRequest(String request) throws SQLException {
         return statement.executeQuery(request);
-
     }
 }

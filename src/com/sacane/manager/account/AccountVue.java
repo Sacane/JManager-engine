@@ -41,7 +41,7 @@ public class AccountVue extends JFrame implements ActionListener {
 
     }
 
-
+    
     public void contentPanel(){
 
         southPanel.add(name);
@@ -57,9 +57,6 @@ public class AccountVue extends JFrame implements ActionListener {
         southPanel.add(insertNameDelete);
         deleteAccount.addActionListener(this);
         southPanel.add(deleteAccount);
-
-    }
-    private void build(){
 
     }
 

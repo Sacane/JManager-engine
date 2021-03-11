@@ -1,12 +1,10 @@
 package com.sacane.manager.account;
-
 import com.sacane.manager.database.DbHandler;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AccountService {
+class AccountService {
 
     private static AccountService instance;
     private List<AccountManager> account;

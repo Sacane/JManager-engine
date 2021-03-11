@@ -1,5 +1,3 @@
-
-
 CREATE TABLE trans(
     id_trans INTEGER PRIMARY KEY AUTOINCREMENT,
     is_in boolean NOT NULL,

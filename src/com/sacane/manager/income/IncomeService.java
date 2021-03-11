@@ -1,14 +1,10 @@
 package com.sacane.manager.income;
-
-
 import com.sacane.manager.database.DbHandler;
 import com.sacane.manager.database.QueryBuilder;
 import com.sacane.manager.gui.ModelWrapper;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class IncomeService {
 

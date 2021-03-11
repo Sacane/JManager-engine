@@ -9,7 +9,6 @@ import java.util.List;
 public class IncomeModel extends AbstractTableModel {
 
     private List<IncomeManager> income;
-
     private ModelWrapper wrapper;
     private IncomeService service;
     private TableInitializer initializer;

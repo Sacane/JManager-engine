@@ -1,21 +1,16 @@
 package com.sacane.manager.account;
-
-import com.sacane.manager.database.DbHandler;
-import com.sacane.manager.database.QueryBuilder;
 import com.sacane.manager.gui.TableInitializer;
 
 import javax.swing.table.AbstractTableModel;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class AccountModel extends AbstractTableModel {
+class AccountModel extends AbstractTableModel {
 
     private AccountService service;
     private List<AccountManager> account;
-    private TableInitializer initializer;
+    private final TableInitializer initializer;
 
     public AccountModel(){
         super();
