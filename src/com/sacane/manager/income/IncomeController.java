@@ -146,6 +146,8 @@ public class IncomeController implements ActionListener {
                     table.repaint();
 
                     handler.close();
+                    labelName.setText("");
+                    putCost.setText("");
                 } catch (SQLException sqe) {
                     System.out.println(sqe.getMessage());
                     System.exit(1);

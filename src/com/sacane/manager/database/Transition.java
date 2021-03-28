@@ -23,5 +23,4 @@ public class Transition {
     public boolean isIn() {
         return isIn;
     }
-
 }

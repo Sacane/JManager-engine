@@ -11,7 +11,7 @@ public class IncomeService {
     private static IncomeService instance;
     private final DbHandler dbHandler = new DbHandler();
     private List<IncomeManager> income;
-    private ModelWrapper wrapper;
+    private final ModelWrapper wrapper;
 
     public IncomeService(ModelWrapper wrapper){
         this.wrapper = wrapper;
@@ -25,8 +25,6 @@ public class IncomeService {
         try {
             var set = dbHandler.getSetByRequest(QueryBuilder.getIncomeMonth(Integer.parseInt(wrapper.getCurrentMonth().representation()), wrapper.getCurrentYear()));
             while(set.next()){
-                System.out.println(set.getString("date"));
-                System.out.println(set.getDouble("value"));
                 income.add(new IncomeManager(set.getString("label"), set.getDouble("value"), set.getString("date")));
             }
         } catch (SQLException e) {

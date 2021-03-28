@@ -1,11 +1,12 @@
 package com.sacane.manager.account;
 import com.sacane.manager.gui.TableInitializer;
-
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Class use to manage the tableModel of the accounts
+ */
 class AccountModel extends AbstractTableModel {
 
     private AccountService service;
@@ -13,7 +14,6 @@ class AccountModel extends AbstractTableModel {
     private final TableInitializer initializer;
 
     public AccountModel(){
-        super();
         this.fireTableDataChanged();
         service = AccountService.getInstance();
         account = service.findLastAccount();
@@ -21,6 +21,9 @@ class AccountModel extends AbstractTableModel {
     }
 
 
+    /**
+     * Use to actualise the model and its visual representation.
+     */
     public void actualiseModel(){
 
         service = AccountService.getInstance();
@@ -39,8 +42,10 @@ class AccountModel extends AbstractTableModel {
         return new TableInitializer(titles);
     }
 
-
-
+    /**
+     * Build an array of Object using to build the table.
+     * @return Object[] which contains the header of the model.
+     */
     private Object[] getHeader(){
         return initializer.buildTitles();
     }
@@ -54,7 +59,6 @@ class AccountModel extends AbstractTableModel {
     public int getColumnCount() {
         return getHeader().length;
     }
-
 
     @Override
     public String getColumnName(int columnIndex) {
