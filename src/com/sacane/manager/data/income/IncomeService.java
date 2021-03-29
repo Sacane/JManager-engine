@@ -1,7 +1,7 @@
-package com.sacane.manager.income;
-import com.sacane.manager.database.DbHandler;
-import com.sacane.manager.database.QueryBuilder;
-import com.sacane.manager.gui.ModelWrapper;
+package com.sacane.manager.data.income;
+import com.sacane.manager.wrapper.DbHandler;
+import com.sacane.manager.wrapper.QueryBuilder;
+import com.sacane.manager.wrapper.ModelWrapper;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;

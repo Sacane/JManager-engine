@@ -1,6 +1,6 @@
-package com.sacane.manager.income;
-import com.sacane.manager.gui.ModelWrapper;
-import com.sacane.manager.gui.TableInitializer;
+package com.sacane.manager.data.income;
+import com.sacane.manager.wrapper.ModelWrapper;
+import com.sacane.manager.wrapper.TableInitializer;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;

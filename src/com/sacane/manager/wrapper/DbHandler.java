@@ -1,5 +1,4 @@
-package com.sacane.manager.database;
-import com.sacane.manager.gui.ModelWrapper;
+package com.sacane.manager.wrapper;
 
 import java.sql.*;
 import java.util.ArrayList;

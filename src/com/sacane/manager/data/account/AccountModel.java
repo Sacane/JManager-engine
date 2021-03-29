@@ -1,5 +1,5 @@
-package com.sacane.manager.account;
-import com.sacane.manager.gui.TableInitializer;
+package com.sacane.manager.data.account;
+import com.sacane.manager.wrapper.TableInitializer;
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 import java.util.List;

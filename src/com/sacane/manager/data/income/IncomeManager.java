@@ -1,4 +1,4 @@
-package com.sacane.manager.income;
+package com.sacane.manager.data.income;
 
 public class IncomeManager {
     private double value;

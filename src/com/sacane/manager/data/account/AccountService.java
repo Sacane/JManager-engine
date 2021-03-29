@@ -1,5 +1,5 @@
-package com.sacane.manager.account;
-import com.sacane.manager.database.DbHandler;
+package com.sacane.manager.data.account;
+import com.sacane.manager.wrapper.DbHandler;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;

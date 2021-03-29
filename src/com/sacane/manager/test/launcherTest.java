@@ -1,6 +1,6 @@
 package com.sacane.manager.test;
 
-import com.sacane.manager.account.AccountVue;
+import com.sacane.manager.data.account.AccountVue;
 
 public class launcherTest {
 

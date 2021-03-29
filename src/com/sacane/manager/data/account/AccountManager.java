@@ -1,4 +1,4 @@
-package com.sacane.manager.account;
+package com.sacane.manager.data.account;
 
 /**
  * Data class use to manage the data of the accounts.

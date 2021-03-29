@@ -1,5 +1,5 @@
-package com.sacane.manager.database;
-import com.sacane.manager.Month;
+package com.sacane.manager.wrapper;
+import com.sacane.manager.data.Month;
 
 import java.util.Objects;
 

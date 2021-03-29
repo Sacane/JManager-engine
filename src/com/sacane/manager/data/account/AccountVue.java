@@ -1,10 +1,9 @@
-package com.sacane.manager.account;
+package com.sacane.manager.data.account;
 
-import com.sacane.manager.database.DbHandler;
-import com.sacane.manager.database.QueryBuilder;
+import com.sacane.manager.wrapper.DbHandler;
+import com.sacane.manager.wrapper.QueryBuilder;
 
 import javax.swing.*;
-import javax.swing.table.AbstractTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

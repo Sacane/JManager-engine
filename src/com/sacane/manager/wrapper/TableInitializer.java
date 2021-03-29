@@ -1,9 +1,8 @@
-package com.sacane.manager.gui;
+package com.sacane.manager.wrapper;
 
-import com.sacane.manager.database.DbHandler;
-import com.sacane.manager.database.QueryBuilder;
+import com.sacane.manager.wrapper.DbHandler;
+import com.sacane.manager.wrapper.QueryBuilder;
 
-import javax.management.Query;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.SQLException;

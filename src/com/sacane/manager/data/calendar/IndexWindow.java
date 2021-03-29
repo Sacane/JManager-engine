@@ -1,8 +1,12 @@
-package com.sacane.manager.gui;
+package com.sacane.manager.data.calendar;
+import com.sacane.manager.wrapper.ModelWrapper;
+
 import javax.swing.*;
 
 public class IndexWindow extends JFrame {
 
+    public static final int WIDTH = 650;
+    public static final int HEIGHT = 350;
     public IndexWindow(){
         build();
         setTitle("JManager");
@@ -13,7 +17,7 @@ public class IndexWindow extends JFrame {
         var model = new ModelWrapper();
         var calendar = new CalendarController(model);
         var mainPanel = new JPanel();
-        setSize(FrameTool.WIDTH, FrameTool.HEIGHT);
+        setSize(WIDTH, HEIGHT);
         setLocationRelativeTo(null);
         setResizable(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

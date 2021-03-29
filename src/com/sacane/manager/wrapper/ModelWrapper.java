@@ -1,7 +1,7 @@
-package com.sacane.manager.gui;
+package com.sacane.manager.wrapper;
 
-import com.sacane.manager.Month;
-import com.sacane.manager.database.DbHandler;
+import com.sacane.manager.data.Month;
+import com.sacane.manager.wrapper.DbHandler;
 
 import java.sql.SQLException;
 
@@ -9,12 +9,14 @@ import java.sql.SQLException;
 
 public class ModelWrapper {
 
+    //DataBase accessor
+    private final DbHandler handler = new DbHandler();
 
+    //Actual data
     private int currentYear;
     private Month currentMonth;
-
-    private final DbHandler handler = new DbHandler();
     private final double totalSold = updateSold();
+
 
     public Month getCurrentMonth() {
         return currentMonth;
@@ -36,7 +38,6 @@ public class ModelWrapper {
         return 0D;
     }
 
-
     public static int getNumberTrans(){
         var access = new DbHandler();
         access.connection();
@@ -53,7 +54,6 @@ public class ModelWrapper {
         return 0;
     }
 
-
     public double getTotalSold() {
         return totalSold;
     }
@@ -62,9 +62,6 @@ public class ModelWrapper {
         return currentYear;
     }
 
-
-
-
     public void setCurrentMonth(Month currentMonth) {
         this.currentMonth = currentMonth;
     }
@@ -72,10 +69,6 @@ public class ModelWrapper {
     public void setCurrentYear(int currentYear) {
         this.currentYear = currentYear;
     }
-
-
-
-
 
 }
 

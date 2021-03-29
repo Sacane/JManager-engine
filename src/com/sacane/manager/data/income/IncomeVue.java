@@ -1,10 +1,8 @@
-package com.sacane.manager.income;
+package com.sacane.manager.data.income;
 
-import com.sacane.manager.gui.ModelWrapper;
+import com.sacane.manager.wrapper.ModelWrapper;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class IncomeVue extends JFrame {
 

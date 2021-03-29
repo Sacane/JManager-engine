@@ -1,4 +1,4 @@
-package com.sacane.manager.income;
+package com.sacane.manager.data.income;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;

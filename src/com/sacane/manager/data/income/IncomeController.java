@@ -1,10 +1,10 @@
-package com.sacane.manager.income;
+package com.sacane.manager.data.income;
 
-import com.sacane.manager.Month;
-import com.sacane.manager.database.DbHandler;
-import com.sacane.manager.database.QueryBuilder;
-import com.sacane.manager.gui.ModelWrapper;
-import com.sacane.manager.gui.TableInitializer;
+import com.sacane.manager.data.Month;
+import com.sacane.manager.wrapper.DbHandler;
+import com.sacane.manager.wrapper.QueryBuilder;
+import com.sacane.manager.wrapper.ModelWrapper;
+import com.sacane.manager.wrapper.TableInitializer;
 
 import javax.swing.*;
 import java.awt.*;

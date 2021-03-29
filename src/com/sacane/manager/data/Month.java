@@ -1,4 +1,4 @@
-package com.sacane.manager;
+package com.sacane.manager.data;
 import java.util.Arrays;
 
 /**
