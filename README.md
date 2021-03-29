@@ -1,6 +1,4 @@
-@author : Johan "Sacane" Ramaroson Rakotomihamina
-                                                                     
-#JManager
+# JManager
 
                                                                      
 This is a simple application to manage our personnal incomes or expenses. 
