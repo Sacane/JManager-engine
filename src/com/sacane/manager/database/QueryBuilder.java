@@ -102,7 +102,7 @@ public class QueryBuilder {
 //        return "SELECT date, label, value, is_in FROM trans NATURAL JOIN income WHERE date >= " + "'" + Month.formattedDate(1, prevMonth, year) + "'"
 //                + " AND date <= " + "'" + Month.formattedDate(1, nextMonth, year) + "'";
 //    }
-//SELECT * FROM trans JOIN income i on trans.id_trans = i.transition
+
     public static String getIncomeMonth(int monthRep, int year){
         int nextMonthRep = (monthRep + 1) % 14;
         var prevMonth = Month.getMonthByRep(monthRep);
