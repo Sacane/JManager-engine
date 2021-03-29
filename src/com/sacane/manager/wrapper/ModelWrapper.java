@@ -33,9 +33,11 @@ public class ModelWrapper {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             System.exit(1);
+        } finally {
+            handler.close();
         }
-        handler.close();
         return 0D;
+
     }
 
     public static int getNumberTrans(){

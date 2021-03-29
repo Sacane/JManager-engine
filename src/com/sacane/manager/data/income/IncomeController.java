@@ -1,22 +1,27 @@
 package com.sacane.manager.data.income;
 
 import com.sacane.manager.data.Month;
+import com.sacane.manager.graph.GraphRenderer;
 import com.sacane.manager.wrapper.DbHandler;
 import com.sacane.manager.wrapper.QueryBuilder;
 import com.sacane.manager.wrapper.ModelWrapper;
 import com.sacane.manager.wrapper.TableInitializer;
 
 import javax.swing.*;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 
 /**
  * Manage all the control in the IncomeFrame.
  * @author Johan "Sacane" Ramaroson Rakotomihamina.
  */
+@SuppressWarnings("rawtypes")
 public class IncomeController implements ActionListener {
 
     // fields to manage the table
@@ -37,14 +42,20 @@ public class IncomeController implements ActionListener {
 
 
 
-    //label to add
+    //labels
     final JLabel label = new JLabel("Label :");
-    final JTextField labelName = new JTextField();
     final JLabel cost = new JLabel("price");
+
+    //Text
+    final JTextField labelName = new JTextField();
     final JTextField putCost = new JTextField("");
+
+    //ComboBox
     final JComboBox day;
     final JComboBox account;
 
+    //Buttons
+    final JButton visualGraph = new JButton("Graph");
     final JButton addButton = new JButton("add label");
 
     final JTextField deleteName = new JTextField();
@@ -62,29 +73,46 @@ public class IncomeController implements ActionListener {
         mainPanel.setLayout(new BorderLayout());
         model = new IncomeModel(wrapper);
         table = new JTable(model);
+        TableRowSorter<TableModel> s = new TableRowSorter<TableModel>(table.getModel());
+        table.setRowSorter(s);
+        java.util.List<RowSorter.SortKey> sortList = new ArrayList<>();
+        sortList.add(new RowSorter.SortKey(2, SortOrder.ASCENDING));
+
+
+        s.setSortKeys(sortList);
+
+
         value = new JLabel((wrapper.getTotalSold()) + " €");
 
         day = new JComboBox(TableInitializer.buildDayCheckBox(wrapper.getCurrentMonth().getNumberDay()));
         account = new JComboBox(TableInitializer.buildAccountCheckBox());
         northPanel.add(info, BorderLayout.CENTER);
         northPanel.add(value, BorderLayout.CENTER);
+        table.setAutoCreateRowSorter(true);
         table.getColumnModel().getColumn(2).setCellRenderer(new PriceCellRenderer());
         southPanel.add(new JScrollPane(table), BorderLayout.CENTER);
-        bottomPanel.add(label);
+
+        deleteName.setColumns(10);
         labelName.setColumns(10);
+        putCost.setColumns(10);
+
+        bottomPanel.add(label);
         bottomPanel.add(labelName);
         bottomPanel.add(cost);
-        putCost.setColumns(10);
         bottomPanel.add(putCost);
         bottomPanel.add(day);
 
         addButton.addActionListener(this);
         deleteButton.addActionListener(this);
+        visualGraph.addActionListener(this);
+
         bottomPanel.add(addButton);
-        deleteName.setColumns(10);
+
         bottomPanel.add(account);
         bottomPanel.add(deleteName);
         bottomPanel.add(deleteButton);
+        bottomPanel.add(visualGraph);
+
         mainPanel.add(northPanel, BorderLayout.NORTH);
         mainPanel.add(southPanel, BorderLayout.CENTER);
         mainPanel.add(bottomPanel, BorderLayout.SOUTH);
@@ -166,6 +194,9 @@ public class IncomeController implements ActionListener {
                     System.exit(1);
                 }
             }
+        }
+        if(o == visualGraph){
+            GraphRenderer.renderer(wrapper);
         }
     }
 }

@@ -93,4 +93,14 @@ public enum Month {
         return Arrays.stream(Month.values()).filter(it -> it.typeText.equals(symbol)).findFirst().orElse(null);
     }
 
+
+    /**
+     *
+     * @param date : String representation of a date, exemple : '2021-02-19'
+     * @return : double of the Day of the date
+     */
+    public static int getDayInDate(String date){
+        var split = date.split("-");
+        return Integer.parseInt(split[2]);
+    }
 }

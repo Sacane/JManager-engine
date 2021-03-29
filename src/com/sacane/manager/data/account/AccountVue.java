@@ -24,10 +24,9 @@ public class AccountVue extends JFrame implements ActionListener {
     private final JTextField insertNameDelete = new JTextField();
     private final JButton deleteAccount = new JButton("delete");
 
-    private JScrollPane scroll;
+    private final JScrollPane scroll;
 
     public AccountVue(){
-        super();
         setTitle("Account");
 //        setPreferredSize(new Dimension(600, 700));
         setSize(800, 500);

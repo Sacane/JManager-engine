@@ -1,10 +1,10 @@
 package com.sacane.manager.data.income;
 
 public class IncomeManager {
+
     private double value;
     private final String nameLabel;
     private final String date;
-
 
     public IncomeManager(String nameLabel, double value, String date){
         this.nameLabel = nameLabel;

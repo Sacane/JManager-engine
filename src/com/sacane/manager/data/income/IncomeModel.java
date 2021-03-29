@@ -9,12 +9,10 @@ import java.util.List;
 public class IncomeModel extends AbstractTableModel {
 
     private List<IncomeManager> income;
-    private ModelWrapper wrapper;
-    private IncomeService service;
-    private TableInitializer initializer;
+    private final IncomeService service;
+    private final TableInitializer initializer;
 
     public IncomeModel(ModelWrapper wrapper){
-        this.wrapper = wrapper;
         this.service = IncomeService.getInstance(wrapper);
         this.initializer = getInitializer();
         income = service.findLastIncome();
@@ -69,6 +67,15 @@ public class IncomeModel extends AbstractTableModel {
             case 1 -> income.get(rowIndex).getNameLabel();
             case 2 -> income.get(rowIndex).getValue();
             default -> throw new IllegalArgumentException("Index invalid");
+        };
+    }
+
+    @Override
+    public Class<?> getColumnClass(int columnIndex) {
+        return switch(columnIndex){
+            case 0, 1 -> String.class;
+            case 2 -> Double.class;
+            default -> throw new IllegalStateException("Unexpected value: " + columnIndex);
         };
     }
 }
