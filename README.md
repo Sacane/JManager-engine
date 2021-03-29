@@ -1,5 +1,8 @@
-@author : Johan "Sacane" Ramaroson Rakotomihamina
+                                                                     @author : Johan "Sacane" Ramaroson Rakotomihamina
+                                                                     
+#JManager
 
+                                                                     
 This is a simple application to manage our personnal incomes or expenses. 
 With this you will soon be able to manage what did you buy, how much did it cost, how much money do you have left etc etc...
 
