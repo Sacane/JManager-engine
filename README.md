@@ -1,4 +1,4 @@
-                                                                     @author : Johan "Sacane" Ramaroson Rakotomihamina
+@author : Johan "Sacane" Ramaroson Rakotomihamina
                                                                      
 #JManager
 
