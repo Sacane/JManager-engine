@@ -34,6 +34,7 @@ public class ModelWrapper {
             System.out.println(e.getMessage());
             System.exit(1);
         } finally {
+            System.out.println("Sold updated");
             handler.close();
         }
         return 0D;

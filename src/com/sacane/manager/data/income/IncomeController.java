@@ -2,10 +2,7 @@ package com.sacane.manager.data.income;
 
 import com.sacane.manager.data.Month;
 import com.sacane.manager.graph.GraphRenderer;
-import com.sacane.manager.wrapper.DbHandler;
-import com.sacane.manager.wrapper.QueryBuilder;
-import com.sacane.manager.wrapper.ModelWrapper;
-import com.sacane.manager.wrapper.TableInitializer;
+import com.sacane.manager.wrapper.*;
 
 import javax.swing.*;
 import javax.swing.table.TableModel;
@@ -167,6 +164,10 @@ public class IncomeController implements ActionListener {
                                     wrapper.getCurrentYear())
 
                     );
+                    Trigger.updateHisto(wrapper.getTotalSold(),
+                            Month.formattedDate(Integer.parseInt(String.valueOf(day.getSelectedItem())),
+                                    wrapper.getCurrentMonth(),
+                                    wrapper.getCurrentYear()), labelName.getText());
                     handler.executeRequest(QueryBuilder.dbUpdateSold(Double.parseDouble(putCost.getText()), (String)account.getSelectedItem()));
                     updateValue();
                     model.actualiseModel();

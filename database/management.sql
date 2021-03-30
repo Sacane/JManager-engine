@@ -1,3 +1,9 @@
+DROP TABLE IF EXISTS income;
+DROP TABLE IF EXISTS project;
+DROP TABLE IF EXISTS promise;
+DROP TABLE IF EXISTS account;
+DROP TABLE IF EXISTS trans;
+
 CREATE TABLE trans(
     id_trans INTEGER PRIMARY KEY AUTOINCREMENT,
     is_in boolean NOT NULL,
@@ -39,3 +45,4 @@ CREATE TABLE account(
 --income[1, z]
 --transaction[1, true, "baba", 200, "oui"]
 --SELECT * FROM income INNER JOIN transaction ON income.id_income = transaction.id_trans WHERE transaction.label = {label}
+

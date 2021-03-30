@@ -121,6 +121,7 @@ public class QueryBuilder {
     public static String selectTotal(){
         return "SELECT SUM(amount) as total FROM account";
     }
+
     public static String selectAccount(){
         return "SELECT name_account, amount FROM account" ;
     }
@@ -134,4 +135,8 @@ public class QueryBuilder {
         return "UPDATE account SET amount = amount +'" + value + "' WHERE name_account = '" + name_account + "'";
     }
 
+    public static String insertHisto(double actualSold, String date, String label){
+        return "INSERT INTO histo VALUES(null," + syntaxBuild(String.valueOf(actualSold), false)
+                + syntaxBuild(date, false) + syntaxBuild(label, true) + ")";
+    }
 }

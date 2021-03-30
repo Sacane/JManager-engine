@@ -85,6 +85,8 @@ public class DbHandler {
         return res;
     }
 
+
+
     int getIdTrans(String label) throws SQLException{
         connection();
 
