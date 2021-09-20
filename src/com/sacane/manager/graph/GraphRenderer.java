@@ -42,7 +42,7 @@ public class GraphRenderer extends JFrame {
         getContentPane().add(new InteractivePanel(plot));
     }
 
-    public static void renderer(ModelWrapper wrapper){
+    public static void render(ModelWrapper wrapper){
         var render = new GraphRenderer(wrapper);
         render.setVisible(true);
     }

@@ -47,16 +47,17 @@ public class DbHandler {
         statement.executeUpdate(request);
     }
 
-    public void addDbIncome(boolean is_in, String label, double value, String description, String date) throws SQLException {
+    public int addDbIncome(boolean is_in, String label, double value, String description, String date) throws SQLException {
         statement.executeUpdate(QueryBuilder.insertTrans(is_in, label, value, description));
         statement.executeUpdate(QueryBuilder.insertIncome(ModelWrapper.getNumberTrans(), date));
+        return ModelWrapper.getNumberTrans();
     }
 
     public int getIdTransByLabel(String name_label) throws SQLException {
         var sql = "SELECT id_trans FROM trans WHERE label = '" + name_label + "'";
+        sql = sql.replaceAll("'", "\\'");
         var set = statement.executeQuery(sql);
-        var id = set.getInt("id_trans");
-        return id;
+        return set.getInt("id_trans");
     }
 
     public void deleteIncome(String name_label) throws SQLException {
@@ -119,8 +120,6 @@ public class DbHandler {
     public ResultSet getSetIncome() throws SQLException{
         return statement.executeQuery(QueryBuilder.selectTrans("income"));
     }
-
-
 
     public ResultSet getSetAccount() throws SQLException{
         return statement.executeQuery(QueryBuilder.selectAccount());

@@ -11,6 +11,7 @@ public class QueryBuilder {
     }
 
     static String getIdTransaction(String label){
+        label = label.replaceAll("'", "\\'");
         return "SELECT id_trans FROM trans WHERE label=" + "'" + label + "'";
     }
 
@@ -23,6 +24,7 @@ public class QueryBuilder {
                 syntaxBuild(name_account, false) +
                 syntaxBuild(String.valueOf(amount), true) + ")";
     }
+
     static String deleteTrans(String label){
         return "DELETE FROM trans WHERE label ='" + label + "'";
     }
@@ -32,6 +34,9 @@ public class QueryBuilder {
 
     public static String insertTrans(boolean is_in, String label, double value, String description){
         Objects.requireNonNull(label);
+
+        label = label.replaceAll("'", " ");
+        System.out.println(label);
         return "INSERT INTO trans VALUES(null," + syntaxBuild(String.valueOf(is_in), false) + syntaxBuild(label, false) +
                 syntaxBuild(String.valueOf(value), false) + syntaxBuild(description, true) + ")";
     }
@@ -107,7 +112,7 @@ public class QueryBuilder {
         int nextMonthRep = (monthRep + 1) % 14;
         var prevMonth = Month.getMonthByRep(monthRep);
         var nextMonth = Month.getMonthByRep(nextMonthRep);
-        System.out.println("SELECT * FROM trans INNER JOIN income ON income.id_income = transaction.id_trans WHERE date >= " + "'" + Month.formattedDate(1, prevMonth, year) + "'"
+        System.out.println("SELECT * FROM trans INNER JOIN income ON income.id_income = trans.id_trans WHERE date >= " + "'" + Month.formattedDate(1, prevMonth, year) + "'"
                 + " AND date <= " + "'" + Month.formattedDate(1, nextMonth, year) + "'");
 
         if(monthRep == 12) {
@@ -115,9 +120,12 @@ public class QueryBuilder {
                     + " AND date <= " + "'" + Month.formattedDate(1, nextMonth, year+1) + "'";
         }
         return "SELECT * FROM trans INNER JOIN income ON income.id_income = trans.id_trans WHERE date >= " + "'" + Month.formattedDate(1, prevMonth, year) + "'"
-                + " AND date <= " + "'" + Month.formattedDate(1, nextMonth, year) + "'";
+                + " AND date < " + "'" + Month.formattedDate(1, nextMonth, year) + "'";
     }
 
+    public static String getIdHisto(int id_income){
+        return "SELECT id FROM histo WHERE id = '" + id_income + "'";
+    }
     public static String selectTotal(){
         return "SELECT SUM(amount) as total FROM account";
     }
@@ -135,8 +143,8 @@ public class QueryBuilder {
         return "UPDATE account SET amount = amount +'" + value + "' WHERE name_account = '" + name_account + "'";
     }
 
-    public static String insertHisto(double actualSold, String date, String label){
-        return "INSERT INTO histo VALUES(null," + syntaxBuild(String.valueOf(actualSold), false)
+    public static String insertHisto(double actualSold, int id_inc, String date, String label){
+        return "INSERT INTO histo VALUES(null," + syntaxBuild(String.valueOf(id_inc), false) + syntaxBuild(String.valueOf(actualSold), false)
                 + syntaxBuild(date, false) + syntaxBuild(label, true) + ")";
     }
 }

@@ -13,9 +13,8 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-
 /**
- * Manage all the control in the IncomeFrame.
+ * Manage all the control in the Income's Panel.
  * @author Johan "Sacane" Ramaroson Rakotomihamina.
  */
 @SuppressWarnings("rawtypes")
@@ -77,7 +76,6 @@ public class IncomeController implements ActionListener {
 
 
         s.setSortKeys(sortList);
-
 
         value = new JLabel((wrapper.getTotalSold()) + " €");
 
@@ -155,7 +153,7 @@ public class IncomeController implements ActionListener {
                 var soldTyped = Double.parseDouble(putCost.getText());
                 try {
                     handler.connection();
-                    handler.addDbIncome(soldTyped >= 0,
+                    int id = handler.addDbIncome(soldTyped >= 0,
                             labelName.getText(),
                             soldTyped,
                             "",
@@ -164,12 +162,14 @@ public class IncomeController implements ActionListener {
                                     wrapper.getCurrentYear())
 
                     );
+
+                    handler.executeRequest(QueryBuilder.dbUpdateSold(Double.parseDouble(putCost.getText()), (String)account.getSelectedItem()));
+                    updateValue();
                     Trigger.updateHisto(wrapper.getTotalSold(),
+                            id,
                             Month.formattedDate(Integer.parseInt(String.valueOf(day.getSelectedItem())),
                                     wrapper.getCurrentMonth(),
                                     wrapper.getCurrentYear()), labelName.getText());
-                    handler.executeRequest(QueryBuilder.dbUpdateSold(Double.parseDouble(putCost.getText()), (String)account.getSelectedItem()));
-                    updateValue();
                     model.actualiseModel();
                     table.revalidate();
                     table.repaint();
@@ -197,7 +197,7 @@ public class IncomeController implements ActionListener {
             }
         }
         if(o == visualGraph){
-            GraphRenderer.renderer(wrapper);
+            GraphRenderer.render(wrapper);
         }
     }
 }

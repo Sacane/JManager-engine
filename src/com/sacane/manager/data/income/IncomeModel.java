@@ -21,10 +21,9 @@ public class IncomeModel extends AbstractTableModel {
 
     private TableInitializer getInitializer(){
         var titles = new ArrayList<String>();
-        titles.add("date");
+        titles.add("Date");
         titles.add("Label");
-        titles.add("price");
-
+        titles.add("Price");
         return new TableInitializer(titles);
     }
 
@@ -36,7 +35,6 @@ public class IncomeModel extends AbstractTableModel {
 
         income = service.findLastIncome();
         int index = income.size();
-        System.out.println(index);
         this.fireTableRowsInserted(0, index-1);
         this.fireTableStructureChanged();
         this.fireTableRowsDeleted(0, index-1);

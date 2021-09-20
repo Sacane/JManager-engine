@@ -13,11 +13,11 @@ public class Trigger {
     }
 
 
-    public static void updateHisto(double actualSold, String date, String label){
+    public static void updateHisto(double actualSold, int id_income, String date, String label){
         var handler = new DbHandler();
         handler.connection();
         try {
-            handler.executeRequest(QueryBuilder.insertHisto(actualSold, date, label));
+            handler.executeRequest(QueryBuilder.insertHisto(actualSold, id_income,date, label));
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             System.exit(1);

@@ -6,10 +6,12 @@ public class IncomeManager {
     private final String nameLabel;
     private final String date;
 
+
     public IncomeManager(String nameLabel, double value, String date){
         this.nameLabel = nameLabel;
         this.value = value;
         this.date = date;
+
     }
 
 
@@ -21,6 +23,7 @@ public class IncomeManager {
     public String getDate() {
         return date;
     }
+
 
     public String getNameLabel() {
         return nameLabel;

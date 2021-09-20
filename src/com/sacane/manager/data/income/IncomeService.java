@@ -24,6 +24,7 @@ public class IncomeService {
 
         try {
             var set = dbHandler.getSetByRequest(QueryBuilder.getIncomeMonth(Integer.parseInt(wrapper.getCurrentMonth().representation()), wrapper.getCurrentYear()));
+
             while(set.next()){
                 income.add(new IncomeManager(set.getString("label"), set.getDouble("value"), set.getString("date")));
             }
@@ -31,7 +32,6 @@ public class IncomeService {
             System.out.println(e.getMessage());
             System.exit(1);
         }
-
 
         dbHandler.close();
     }
