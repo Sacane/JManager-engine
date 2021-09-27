@@ -24,6 +24,7 @@ public class IncomeModel extends AbstractTableModel {
         titles.add("Date");
         titles.add("Label");
         titles.add("Price");
+        //titles.add("Sold");
         return new TableInitializer(titles);
     }
 
@@ -63,6 +64,7 @@ public class IncomeModel extends AbstractTableModel {
             case 0 -> income.get(rowIndex).getDate();
             case 1 -> income.get(rowIndex).getNameLabel();
             case 2 -> income.get(rowIndex).getValue();
+            //case 3 -> income.get(rowIndex).getActualSold();
             default -> throw new IllegalArgumentException("Index invalid");
         };
     }

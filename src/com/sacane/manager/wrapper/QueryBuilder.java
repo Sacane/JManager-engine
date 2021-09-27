@@ -108,18 +108,19 @@ public class QueryBuilder {
 //                + " AND date <= " + "'" + Month.formattedDate(1, nextMonth, year) + "'";
 //    }
 
+    //TODO : add NATURAL JOIN to history table
     public static String getIncomeMonth(int monthRep, int year){
         int nextMonthRep = (monthRep + 1) % 14;
         var prevMonth = Month.getMonthByRep(monthRep);
         var nextMonth = Month.getMonthByRep(nextMonthRep);
-        System.out.println("SELECT * FROM trans INNER JOIN income ON income.id_income = trans.id_trans WHERE date >= " + "'" + Month.formattedDate(1, prevMonth, year) + "'"
+        System.out.println("SELECT * FROM trans INNER JOIN income ON income.id_income = trans.id_trans NATURAL JOIN histo WHERE date >= " + "'" + Month.formattedDate(1, prevMonth, year) + "'"
                 + " AND date <= " + "'" + Month.formattedDate(1, nextMonth, year) + "'");
 
         if(monthRep == 12) {
-            return "SELECT * FROM trans INNER JOIN income ON income.id_income = trans.id_trans WHERE date >= " + "'" + Month.formattedDate(1, prevMonth, year) + "'"
+            return "SELECT * FROM trans INNER JOIN income ON income.id_income = trans.id_trans NATURAL JOIN histo WHERE date >= " + "'" + Month.formattedDate(1, prevMonth, year) + "'"
                     + " AND date <= " + "'" + Month.formattedDate(1, nextMonth, year+1) + "'";
         }
-        return "SELECT * FROM trans INNER JOIN income ON income.id_income = trans.id_trans WHERE date >= " + "'" + Month.formattedDate(1, prevMonth, year) + "'"
+        return "SELECT * FROM trans INNER JOIN income ON income.id_income = trans.id_trans NATURAL JOIN histo WHERE date >= " + "'" + Month.formattedDate(1, prevMonth, year) + "'"
                 + " AND date < " + "'" + Month.formattedDate(1, nextMonth, year) + "'";
     }
 
@@ -146,5 +147,9 @@ public class QueryBuilder {
     public static String insertHisto(double actualSold, int id_inc, String date, String label){
         return "INSERT INTO histo VALUES(null," + syntaxBuild(String.valueOf(id_inc), false) + syntaxBuild(String.valueOf(actualSold), false)
                 + syntaxBuild(date, false) + syntaxBuild(label, true) + ")";
+    }
+
+    public static String getSoldInHistory(int id_histo){
+        return "SELECT actualSold FROM histo WHERE id_histo = '" + id_histo +"'";
     }
 }

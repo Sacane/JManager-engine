@@ -23,10 +23,12 @@ public class IncomeService {
         dbHandler.connection();
 
         try {
+
             var set = dbHandler.getSetByRequest(QueryBuilder.getIncomeMonth(Integer.parseInt(wrapper.getCurrentMonth().representation()), wrapper.getCurrentYear()));
 
             while(set.next()){
                 income.add(new IncomeManager(set.getString("label"), set.getDouble("value"), set.getString("date")));
+                //add set.getDouble("actualSold");
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
