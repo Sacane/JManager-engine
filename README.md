@@ -1,3 +1,8 @@
+[DEPRECATED]
+# BEWARE
+This is a deprecated version of my JManager application. The next one will be a WebApp made in Kotlin/Spring and VueJs.
+Click on this [link](https://github.com/Sacane/JManager-back) to browse the new back-end part of my application.
+
 # JManager
 
                                                                      
